@@ -46,3 +46,5 @@
 
 (add-hook 'pdf-view-mode-hook 'setup-pdf-view)
 ;; (add-hook 'minibuffer-setup-hook 'xah-fly-insert-mode-activate)
+
+(provide 'extra-mode-bindings)
