@@ -19,8 +19,9 @@
    ;; if current mode is xah-html-mode, change some key
    ((eq major-mode 'dired-mode)
     (define-key xah-fly-key-map "b" 'dired-up-directory))
-    ;; more major-mode checking here
-    
+   ((eq major-mode 'magit-mode)
+    (define-key xah-fly-key-map "q" 'magit-bury-buffer))
+   ;; more major-mode checking here
     ;; if nothing match, do nothing
     (t nil)))
   
@@ -30,6 +31,7 @@
 (define-key ivy-minibuffer-map (kbd "M-k") 'next-line)
 (define-key ivy-minibuffer-map (kbd "M-I") 'ivy-insert-current)
 
+;; pdf-vew settings
 (defun setup-pdf-view ()
   (interactive)
   (define-key pdf-view-mode-map "\C-s" 'isearch-forward)
@@ -46,5 +48,13 @@
 
 (add-hook 'pdf-view-mode-hook 'setup-pdf-view)
 ;; (add-hook 'minibuffer-setup-hook 'xah-fly-insert-mode-activate)
+
+;; magit settings
+(defun my-magit-mode-bury-buffer ()
+  (interactive)
+  (magit-mode-bury-buffer)
+  (xah-fly-command-mode-activate)
+  )
+(define-key magit-mode-map (kbd "q") 'my-magit-mode-bury-buffer)
 
 (provide 'extra-mode-bindings)
