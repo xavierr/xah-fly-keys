@@ -32,7 +32,11 @@
 (define-key ivy-minibuffer-map (kbd "M-I") 'ivy-insert-current)
 
 ;; general settings
-(advice-add 'quit-window :after 'xah-fly-command-mode-activate)
+(defun my-xah-fly-command-mode-activate (&optional a b)
+  "Version that takes argument - to be used in advice"
+  (xah-fly-command-mode-activate)
+  )
+(advice-add #'quit-window :after #'my-xah-fly-command-mode-activate)
 
 ;; pdf-vew settings
 (defun setup-pdf-view ()
@@ -51,8 +55,5 @@
 
 (add-hook 'pdf-view-mode-hook 'setup-pdf-view)
 ;; (add-hook 'minibuffer-setup-hook 'xah-fly-insert-mode-activate)
-
-;; magit settings
-(advice-add 'magit-mode-bury-buffer :after 'xah-fly-command-mode-activate)
 
 (provide 'extra-mode-bindings)
