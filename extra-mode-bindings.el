@@ -31,6 +31,9 @@
 (define-key ivy-minibuffer-map (kbd "M-k") 'next-line)
 (define-key ivy-minibuffer-map (kbd "M-I") 'ivy-insert-current)
 
+;; general settings
+(advice-add 'quit-window :after 'xah-fly-command-mode-activate)
+
 ;; pdf-vew settings
 (defun setup-pdf-view ()
   (interactive)
@@ -50,11 +53,6 @@
 ;; (add-hook 'minibuffer-setup-hook 'xah-fly-insert-mode-activate)
 
 ;; magit settings
-(defun my-magit-mode-bury-buffer ()
-  (interactive)
-  (magit-mode-bury-buffer)
-  (xah-fly-command-mode-activate)
-  )
-(define-key magit-mode-map (kbd "q") 'my-magit-mode-bury-buffer)
+(advice-add 'magit-mode-bury-buffer :after 'xah-fly-command-mode-activate)
 
 (provide 'extra-mode-bindings)
