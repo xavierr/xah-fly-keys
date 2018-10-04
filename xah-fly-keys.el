@@ -3691,7 +3691,7 @@ Version 2017-01-21"
      ("SPC" . xah-fly-leader-key-map)
      ("DEL" . xah-fly-leader-key-map)
 
-     ("'" . xah-reformat-lines)
+     ("'" . quit-window)
      ("," . xah-shrink-whitespaces)
      ("-" . xah-cycle-hyphen-underscore-space)
      ("." . xah-backward-kill-word)
