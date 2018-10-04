@@ -3378,8 +3378,6 @@ Version 2019-02-12"
    ;; z
 ))
 
-(define-key xah-fly-t-keymap  (kbd "f") 'switch-to-buffer-other-window)
-
 (xah-fly--define-keys
  (define-prefix-command 'xah-fly-w-keymap)
  '(
