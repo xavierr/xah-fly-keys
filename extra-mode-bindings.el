@@ -16,9 +16,6 @@
 
   (cond
 
-   ;; if current mode is xah-html-mode, change some key
-   ((eq major-mode 'dired-mode)
-    (define-key xah-fly-key-map "b" 'dired-up-directory))
    ((eq major-mode 'magit-mode)
     (define-key xah-fly-key-map "q" 'magit-bury-buffer))
    ;; more major-mode checking here
@@ -50,10 +47,17 @@
   (define-key pdf-view-mode-map "k" 'next-line)
   (define-key pdf-view-mode-map "a" 'pdf-annot-add-highlight-markup-annotation)
   (define-key pdf-view-mode-map "\C-f" 'pdf-links-isearch-link)
+  (require 'pdf-links)
   (define-key pdf-links-minor-mode-map "f" nil)
   )
 
 (add-hook 'pdf-view-mode-hook 'setup-pdf-view)
-;; (add-hook 'minibuffer-setup-hook 'xah-fly-insert-mode-activate)
+
+;; dired settings
+(defun setup-dired ()
+  (interactive)
+  (define-key dired-mode-map "i" 'previous-line)
+  (define-key dired-mode-map "k" 'next-line))
+(add-hook 'dired-mode-hook 'setup-dired)
 
 (provide 'extra-mode-bindings)
