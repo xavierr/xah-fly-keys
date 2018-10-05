@@ -2701,7 +2701,6 @@ Version 2017-01-29"
   (interactive)
   (describe-function major-mode))
 
-
 
 (defvar xah--dvorak-to-qwerty-kmap
   '(("." . "e")
@@ -3151,6 +3150,7 @@ Version 2017-01-21"
    ("c" . bookmark-bmenu-list)
    ("e" . ibuffer)
    ("u" . switch-to-buffer-other-window)
+   ("g" . find-file-other-window)
    ("h" . recentf-open-files)
    ("i" . xah-copy-file-path)
    ("l" . bookmark-set)
