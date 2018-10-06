@@ -110,20 +110,22 @@
 (defun my-insert-blank-line-below ()
   "insert blank line below"
   (interactive)
-  (next-line)
-  (beginning-of-line)
+  (end-of-line)
   (open-line 1)
+  (forward-line 1)
   (xah-fly-insert-mode-activate)
+  (indent-for-tab-command)
   )
 
 (defun my-insert-blank-line-above ()
   "insert blank line above"
   (interactive)
-  (previous-line)
   (beginning-of-line)
   (open-line 1)
   (xah-fly-insert-mode-activate)
+  (indent-for-tab-command)
   )
+
 (define-key xah-fly-leader-key-map (kbd "h") 'my-insert-blank-line-above)
 (define-key xah-fly-leader-key-map (kbd "n") 'my-insert-blank-line-below)
 
