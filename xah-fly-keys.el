@@ -3740,7 +3740,7 @@ Version 2017-01-21"
      ("u" . isearch-forward)
      ("v" . xah-forward-right-bracket)
      ("w" . xah-goto-matching-bracket)
-     ("x" . xah-toggle-letter-case)
+     ("x" . execute-extended-command)
      ("y" . set-mark-command)
      ("z" . xah-goto-matching-bracket)))
     (define-key xah-fly-key-map (kbd "M-i") 'previous-line)
