@@ -38,7 +38,7 @@
   (xah-fly-command-mode-activate)
   )
 (advice-add #'quit-window :after #'my-xah-fly-command-mode-activate-2)
-(define-key key-translation-map (kbd "ESC") (kbd "<home>"))
+(define-key key-translation-map (kbd "ESC") (kbd "<insert>"))
 
 
 ;; add vi-like delete and switch to insert mode
@@ -64,26 +64,21 @@
   (xah-fly-insert-mode-activate)
   )
 
+(define-prefix-command 'vi-type-delete-and-insert-keymap)
+(define-key vi-type-delete-and-insert-keymap "r" #'my-xah-kill-word)
+(define-key vi-type-delete-and-insert-keymap "e" #'my-xah-backward-kill-word)
+(define-key vi-type-delete-and-insert-keymap "d" #'my-delete-char)
+(define-key vi-type-delete-and-insert-keymap "s" #'my-delete-backward-char)
+
 (defun add-vi-delete-and-switch-to-insert-mode-bindings ()
   (interactive)
-  (define-key xah-fly-key-map "R" #'my-xah-kill-word)
-  (define-key xah-fly-key-map "E" #'my-xah-backward-kill-word)
-  (define-key xah-fly-key-map "D" #'my-delete-char)
-  (define-key xah-fly-key-map "S" #'my-delete-backward-char)
-  )
-
-(defun remove-vi-delete-and-switch-to-insert-mode-bindings ()
-  (interactive)
-  (define-key xah-fly-key-map "R" nil)
-  (define-key xah-fly-key-map "E" nil)
-  (define-key xah-fly-key-map "D" nil)
-  (define-key xah-fly-key-map "S" nil)
+  (define-key xah-fly-key-map "w" 'vi-type-delete-and-insert-keymap)
+  (define-key xah-fly-key-map "a" 'vi-type-delete-and-insert-keymap)
   )
 
 (add-hook 'xah-fly-command-mode-activate-hook 'add-vi-delete-and-switch-to-insert-mode-bindings)
-(add-hook 'xah-fly-insert-mode-activate-hook 'remove-vi-delete-and-switch-to-insert-mode-bindings)
 
-;; pdf-vew settingsd
+;; pdf-vew settings
 (defun setup-pdf-view ()
   (interactive)
   (define-key pdf-view-mode-map "\C-s" 'isearch-forward)
@@ -110,6 +105,36 @@
 
 ;; multiple cursor setting
 (add-hook 'multiple-cursors-mode-disabled-hook #'xah-fly-command-mode-activate)
+
+;; insert blank line above and below
+(defun my-insert-blank-line-below ()
+  "insert blank line below"
+  (interactive)
+  (next-line)
+  (beginning-of-line)
+  (open-line 1)
+  (xah-fly-insert-mode-activate)
+  )
+
+(defun my-insert-blank-line-above ()
+  "insert blank line above"
+  (interactive)
+  (previous-line)
+  (beginning-of-line)
+  (open-line 1)
+  (xah-fly-insert-mode-activate)
+  )
+(define-key xah-fly-leader-key-map (kbd "h") 'my-insert-blank-line-above)
+(define-key xah-fly-leader-key-map (kbd "n") 'my-insert-blank-line-below)
+
+;; change binding for moving to beginning and end of buffer
+(add-hook 'xah-fly-command-mode-activate-hook
+          (lambda () (define-key xah-fly-key-map "<" 'beginning-of-buffer))
+          )
+(define-key xah-fly-leader-key-map (kbd "<") 'end-of-buffer)
+(add-hook 'xah-fly-insert-mode-activate-hook
+          (lambda () (define-key xah-fly-key-map "<" nil))
+          )
 
 (provide 'extra-mode-bindings)
 
