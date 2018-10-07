@@ -3189,8 +3189,9 @@ Version 2019-02-12"
 (xah-fly--define-keys
  (define-prefix-command 'xah-fly-c-keymap)
  '(
+   ("a" . write-file)
    ("," . xah-open-in-external-app)
-   ("." . find-file)
+   ("." . xah-open-file-fast)
    ("c" . bookmark-bmenu-list)
    ("e" . ibuffer)
    ("u" . switch-to-buffer-other-window)
@@ -3199,12 +3200,11 @@ Version 2019-02-12"
    ("i" . xah-copy-file-path)
    ("l" . bookmark-set)
    ("n" . xah-new-empty-buffer)
-   ("o" . xah-show-in-desktop)
+   ("o" . save-buffer)
    ("p" . xah-open-last-closed)
    ("f" . xah-open-recently-closed)
    ("y" . xah-list-recently-closed)
-   ("r" . xah-open-file-fast)
-   ("s" . write-file)
+   ("r" . find-file)
    ))
 
 (xah-fly--define-keys
@@ -3471,7 +3471,6 @@ Version 2019-02-12"
    ;;
    ))
 
-(define-key xah-fly-leader-key-map (kbd "ø") 'save-buffer) 
 (define-key xah-fly-leader-key-map (kbd "M-i") 'delete-window-up)
 (define-key xah-fly-leader-key-map (kbd "M-k") 'delete-window-down)
 (define-key xah-fly-leader-key-map (kbd "M-j") 'delete-window-left)
@@ -3623,6 +3622,7 @@ Version 2019-02-12"
   (progn
     (define-key xah-fly-key-map (kbd "<home>") 'isearch-repeat-forward)
     (define-key xah-fly-key-map (kbd "<insert>") 'xah-fly-command-mode-activate)
+    (define-key xah-fly-key-map (kbd "<f1>") 'xah-fly-command-mode-activate)
     (define-key xah-fly-key-map (kbd "<menu>") 'xah-fly-command-mode-activate)
     (define-key xah-fly-key-map (kbd "<f8>") 'xah-fly-command-mode-activate-no-hook)
 
