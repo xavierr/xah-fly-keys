@@ -138,6 +138,25 @@
           (lambda () (define-key xah-fly-key-map "<" nil))
           )
 
+;; helping function
+(defun my-key-convert ()
+  (interactive)
+  (let ((str (read-string "char: ")))
+    (message (xah--qwerty-to-dvorak str))
+    )
+  )
+
+(defun xah--qwerty-to-dvorak (@charstr)
+  "Convert qwerty to dvorak key."
+  (interactive)
+  (if (> (length @charstr) 1)
+      @charstr
+    (let (($result (rassoc @charstr xah--dvorak-to-qwerty-kmap)))
+      (if $result
+          (car $result)
+        @charstr
+        ))))
+
 (provide 'extra-mode-bindings)
 
  
