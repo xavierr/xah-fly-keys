@@ -122,7 +122,7 @@
 (define-key vi-type-delete-and-insert-keymap "g" #'my-delete-end-of-line)
 (define-key vi-type-delete-and-insert-keymap "l" #'my-right-char)
 (define-key vi-type-delete-and-insert-keymap "j" #'my-left-char)
-(define-key vi-type-delete-and-insert-keymap "j" #'my-xah-cut-line-or-region)
+(define-key vi-type-delete-and-insert-keymap "x" #'my-xah-cut-line-or-region)
 
 (defun add-vi-delete-and-switch-to-insert-mode-bindings ()
   (interactive)
