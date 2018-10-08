@@ -3207,6 +3207,11 @@ Version 2019-02-12"
    ("r" . find-file)
    ))
 
+(define-key xah-fly-c-keymap (kbd "M-i") 'split-window-vertically)
+(define-key xah-fly-c-keymap (kbd "M-k") 'split-window-vertically)
+(define-key xah-fly-c-keymap (kbd "M-j") 'split-window-horizontally)
+(define-key xah-fly-c-keymap (kbd "M-l") 'split-window-horizontally)
+
 (xah-fly--define-keys
  (define-prefix-command 'xah-fly-e-keymap)
  '(
@@ -3807,10 +3812,6 @@ Version 2017-01-21"
     (define-key xah-fly-key-map (kbd "M-k") 'my-windmove-down)
     (define-key xah-fly-key-map (kbd "M-j") 'my-windmove-left)
     (define-key xah-fly-key-map (kbd "M-l") 'my-windmove-right)
-    (define-key xah-fly-key-map (kbd "M-I") 'split-window-vertically)
-    (define-key xah-fly-key-map (kbd "M-K") 'split-window-vertically)
-    (define-key xah-fly-key-map (kbd "M-J") 'split-window-horizontally)
-    (define-key xah-fly-key-map (kbd "M-L") 'split-window-horizontally)
 
   (define-key xah-fly-key-map (kbd (xah-fly--key-char "a"))
     (if (fboundp 'smex) 'smex (if (fboundp 'helm-M-x) 'helm-M-x 'execute-extended-command)))

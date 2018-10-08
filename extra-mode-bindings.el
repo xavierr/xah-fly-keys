@@ -57,13 +57,14 @@
 (defun my-switch-to-insert-mode ()
   (interactive)
   (cond
-   ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate)
-    (eq major-mode 'dired-mode) (xah-fly-insert-mode-activate)
-    (eq major-mode 'ibuffer-mode) (xah-fly-insert-mode-activate)
-    (eq major-mode 'magit-mode) (xah-fly-insert-mode-activate)
-    t nil)
+   ((eq major-mode 'matlab-mode) (xah-fly-command-mode-activate))
+   ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'dired-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'ibuffer-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'magit-mode) (xah-fly-insert-mode-activate))
+   (t nil))
    )
-  )
+  
 (add-hook 'my-windmove-hook #'my-switch-to-insert-mode)
 ;; add vi-like delete and switch to insert mode
 
