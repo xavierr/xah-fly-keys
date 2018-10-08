@@ -3730,7 +3730,7 @@ Version 2017-01-21"
      ("i" . undo)
      ("j" . xah-copy-line-or-region)
      ("k" . xah-paste-or-paste-previous)
-     ("l" . execute-extended-command)
+     ("l" . xah-shrink-whitespaces)
      ("m" . xah-backward-left-bracket)
      ("n" . forward-char)
      ("o" . delete-backward-char)
