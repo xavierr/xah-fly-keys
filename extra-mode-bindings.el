@@ -47,6 +47,9 @@
 ;; extra setting for magit
 (advice-add #'magit-status :after #'xah-fly-insert-mode-activate)
 
+;; extra setting for magit
+(advice-add #'ibuffer :after #'xah-fly-insert-mode-activate)
+
 ;; switch to insert mode for some major mode
 (defun my-switch-to-insert-mode ()
   (interactive)
