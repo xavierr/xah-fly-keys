@@ -108,7 +108,11 @@
   (left-char)
   (xah-fly-insert-mode-activate)
   )
-
+(defun my-xah-cut-line-or-region ()
+  (interactive)
+  (xah-cut-line-or-region)
+  (xah-fly-insert-mode-activate)
+  )
 (define-prefix-command 'vi-type-delete-and-insert-keymap)
 (define-key vi-type-delete-and-insert-keymap "r" #'my-xah-kill-word)
 (define-key vi-type-delete-and-insert-keymap "e" #'my-xah-backward-kill-word)
@@ -118,6 +122,7 @@
 (define-key vi-type-delete-and-insert-keymap "g" #'my-delete-end-of-line)
 (define-key vi-type-delete-and-insert-keymap "l" #'my-right-char)
 (define-key vi-type-delete-and-insert-keymap "j" #'my-left-char)
+(define-key vi-type-delete-and-insert-keymap "j" #'my-xah-cut-line-or-region)
 
 (defun add-vi-delete-and-switch-to-insert-mode-bindings ()
   (interactive)
