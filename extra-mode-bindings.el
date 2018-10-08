@@ -13,13 +13,8 @@
 (defun my-bindkey-xfk-command-mode ()
   "Define keys for `xah-fly-command-mode-activate-hook'"
   (interactive)
-
   (cond
-
-   ((eq major-mode 'magit-mode)
-    (define-key xah-fly-key-map "q" 'magit-bury-buffer))
-   ;; more major-mode checking here
-    ;; if nothing match, do nothing
+   ((eq major-mode 'magit-mode) (define-key xah-fly-key-map "q" 'magit-bury-buffer))
     (t nil)))
   
 (add-hook 'xah-fly-command-mode-activate-hook 'my-bindkey-xfk-command-mode)
@@ -53,6 +48,11 @@
 
 ;; extra setting for dired
 (advice-add #'dired-jump :after #'xah-fly-insert-mode-activate)
+
+;; extra setting for org
+(add-hook 'org-link-mode-hook #'xah-fly-insert-mode-activate)
+(advice-add #'open-bookmark-buffer-for-editing :after #'xah-fly-command-mode-activate)
+(advice-add #'follow-bookmark-link :after #'xah-fly-command-mode-activate)
 
 ;; switch to insert mode for some major mode
 (defun my-switch-to-insert-mode ()
