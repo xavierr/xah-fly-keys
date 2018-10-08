@@ -40,7 +40,22 @@
 (advice-add #'quit-window :after #'my-xah-fly-command-mode-activate-2)
 (define-key key-translation-map (kbd "ESC") (kbd "<insert>"))
 
+;; extra setting for matlab functions
+(advice-add #'switch-to-matlab :after #'xah-fly-insert-mode-activate)
+(advice-add #'set-gud-break :after #'xah-fly-insert-mode-activate)
 
+;; extra setting for magit
+(advice-add #'magit-status :after #'xah-fly-insert-mode-activate)
+
+;; switch to insert mode for some major mode
+(defun my-switch-to-insert-mode ()
+  (interactive)
+  (cond
+   ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate)
+    t nil)
+   )
+  )
+(add-hook 'my-windmove-hook #'my-switch-to-insert-mode)
 ;; add vi-like delete and switch to insert mode
 
 (defun my-xah-kill-word ()
