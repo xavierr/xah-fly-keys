@@ -3420,6 +3420,7 @@ Version 2019-02-12"
    ("DEL" . xah-fly-insert-mode-activate)
    ("RET" . execute-extended-command)
    ("TAB" . xah-fly--tab-key-map)
+   ("<" . xah-fly--tab-key-map)
    ("." . xah-fly-dot-keymap)
    ("'" . xah-fill-or-unfill)
    ("," . xah-fly-comma-keymap)
@@ -3744,7 +3745,8 @@ Version 2017-01-21"
 
      ("SPC" . xah-fly-leader-key-map)
      ("DEL" . xah-fly-leader-key-map)
-
+     ("<" . beginning-of-buffer)
+     
      ("'" . quit-window)
      ("," . xah-shrink-whitespaces)
      ("-" . xah-cycle-hyphen-underscore-space)
@@ -3854,7 +3856,7 @@ Version 2018-05-07"
      ("SPC" . nil)
      ;; ("SPC" . xah-fly-space-key)
      ("DEL" . nil)
-
+     ("<" . nil)
      ("'" . nil)
      ("," . nil)
      ("-" . nil)
