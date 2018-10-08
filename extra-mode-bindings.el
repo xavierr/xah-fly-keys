@@ -58,6 +58,9 @@
   (interactive)
   (cond
    ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate)
+    (eq major-mode 'dired-mode) (xah-fly-insert-mode-activate)
+    (eq major-mode 'ibuffer-mode) (xah-fly-insert-mode-activate)
+    (eq major-mode 'magit-mode) (xah-fly-insert-mode-activate)
     t nil)
    )
   )
