@@ -42,15 +42,16 @@
 
 ;; extra setting for matlab functions
 (advice-add #'switch-to-matlab :after #'xah-fly-insert-mode-activate)
-(advice-add #'set-gud-break :after #'xah-fly-insert-mode-activate)
+(advice-add #'matlab-jump-to-file-at-line :after #'my-xah-fly-command-mode-activate-1)
+(advice-add #'matlab-navigate-dbstack :after #'xah-fly-insert-mode-activate)
 
 ;; extra setting for magit
 (advice-add #'magit-status :after #'xah-fly-insert-mode-activate)
 
-;; extra setting for magit
+;; extra setting for ibuffer
 (advice-add #'ibuffer :after #'xah-fly-insert-mode-activate)
 
-;; extra setting for magit
+;; extra setting for dired
 (advice-add #'dired-jump :after #'xah-fly-insert-mode-activate)
 
 ;; switch to insert mode for some major mode
@@ -59,6 +60,7 @@
   (cond
    ((eq major-mode 'matlab-mode) (xah-fly-command-mode-activate))
    ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'matlab-navigate-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'dired-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'ibuffer-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'magit-mode) (xah-fly-insert-mode-activate))
