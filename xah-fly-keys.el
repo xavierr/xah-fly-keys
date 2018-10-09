@@ -4002,7 +4002,7 @@ URL `http://ergoemacs.org/misc/ergoemacs_vi_mode.html'"
   (progn
     ;; when going into minibuffer, switch to insertion mode.
     (add-hook 'minibuffer-setup-hook 'xah-fly-insert-mode-activate)
-    (add-hook 'minibuffer-exit-hook 'xah-fly-command-mode-activate)
+    ;; (add-hook 'minibuffer-exit-hook 'xah-fly-command-mode-activate)
     ;; (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
     ;; when in shell mode, switch to insertion mode.
     ;; (add-hook 'shell-mode-hook 'xah-fly-insert-mode-activate)
