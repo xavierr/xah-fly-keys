@@ -3585,7 +3585,6 @@ Version 2017-01-21"
   ;; set control meta, etc keys
 
   (progn
-    (define-key xah-fly-key-map (kbd "<home>") 'isearch-repeat-forward)
     (define-key xah-fly-key-map (kbd "<insert>") 'xah-fly-command-mode-activate)
     (define-key xah-fly-key-map (kbd "<f1>") 'xah-fly-command-mode-activate)
     (define-key xah-fly-key-map (kbd "<menu>") 'xah-fly-command-mode-activate)
@@ -3747,7 +3746,7 @@ Version 2017-01-21"
      ("u" . isearch-forward)
      ("v" . xah-forward-right-bracket)
      ("w" . xah-goto-matching-bracket)
-     ("x" . execute-extended-command)
+     ("x" . counsel-M-x)
      ("y" . set-mark-command)
      ("z" . xah-goto-matching-bracket)))
     (define-key xah-fly-key-map (kbd "M-i") 'previous-line)

@@ -76,6 +76,7 @@ by my- which switches to insert mode after execution"
   (interactive)
   (define-key xah-fly-key-map "w" 'vi-type-delete-and-insert-keymap)
   (define-key xah-fly-key-map "a" 'vi-type-delete-and-insert-keymap)
+  (define-key xah-fly-key-map (kbd "<home>") 'vi-type-delete-and-insert-keymap)
   )
 
 (add-hook 'xah-fly-command-mode-activate-hook 'add-vi-delete-and-switch-to-insert-mode-bindings)
