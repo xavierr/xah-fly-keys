@@ -1,15 +1,22 @@
-(require 'which-key)
-(which-key-mode)
+;; Use ESC key to switch to command mode
+(define-key key-translation-map (kbd "ESC") (kbd "<insert>"))
 
-(defvar my-mc-keymap (make-sparse-keymap))
-(define-key my-mc-keymap (kbd "k") 'mc/mark-next-like-this)
-(define-key my-mc-keymap (kbd "i") 'mc/unmark-next-like-this)
-(defun my-mc-start ()
+;; Switch by default to insert mode for some major modes
+(defun my-switch-to-insert-mode ()
   (interactive)
-  (set-transient-map my-mc-keymap t)
-  )
+  (cond
+   ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'matlab-navigate-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'dired-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'ibuffer-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'magit-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'magit-status-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'magit-popup-mode) (xah-fly-insert-mode-activate))
+   (t nil))
+   )
+(add-hook 'buffer-list-update-hook #'my-switch-to-insert-mode)
 
-
+;; Extra keybindings for specific major modes in command mode
 (defun my-bindkey-xfk-command-mode ()
   "Define keys for `xah-fly-command-mode-activate-hook'"
   (interactive)
@@ -18,68 +25,29 @@
     (t nil)))
   
 (add-hook 'xah-fly-command-mode-activate-hook 'my-bindkey-xfk-command-mode)
-
-(define-key ivy-minibuffer-map (kbd "M-i") 'previous-line)
-(define-key ivy-minibuffer-map (kbd "M-k") 'next-line)
-(define-key ivy-minibuffer-map (kbd "M-I") 'ivy-insert-current)
-
-;; general settings
-(defun my-xah-fly-command-mode-activate-2 (&optional a b)
-  "Version that takes argument - to be used in advice"
-  (xah-fly-command-mode-activate)
-  )
-(defun my-xah-fly-command-mode-activate-1 (&optional a)
-  "Version that takes argument - to be used in advice"
-  (xah-fly-command-mode-activate)
-  )
-(advice-add #'quit-window :after #'my-xah-fly-command-mode-activate-2)
-(define-key key-translation-map (kbd "ESC") (kbd "<insert>"))
-
-;; extra setting for matlab functions
-(advice-add #'switch-to-matlab :after #'xah-fly-insert-mode-activate)
-(advice-add #'matlab-jump-to-file-at-line :after #'my-xah-fly-command-mode-activate-1)
-(advice-add #'matlab-navigate-dbstack :after #'xah-fly-insert-mode-activate)
-
-;; extra setting for magit
-(advice-add #'magit-status :after #'xah-fly-insert-mode-activate)
-
-;; extra setting for ibuffer
-(advice-add #'ibuffer :after #'xah-fly-insert-mode-activate)
-
-;; extra setting for dired
-(advice-add #'dired-jump :after #'xah-fly-insert-mode-activate)
-
-;; extra setting for org
-(add-hook 'org-link-mode-hook #'xah-fly-insert-mode-activate)
-(advice-add #'open-bookmark-buffer-for-editing :after #'xah-fly-command-mode-activate)
-(advice-add #'follow-bookmark-link :after #'xah-fly-command-mode-activate)
-
-;; switch to insert mode for some major mode
-(defun my-switch-to-insert-mode ()
-  (interactive)
-  (cond
-   ((eq major-mode 'matlab-mode) (xah-fly-command-mode-activate))
-   ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate))
-   ((eq major-mode 'matlab-navigate-mode) (xah-fly-insert-mode-activate))
-   ((eq major-mode 'dired-mode) (xah-fly-insert-mode-activate))
-   ((eq major-mode 'ibuffer-mode) (xah-fly-insert-mode-activate))
-   ((eq major-mode 'magit-mode) (xah-fly-insert-mode-activate))
-   (t nil))
-   )
   
-(add-hook 'my-windmove-hook #'my-switch-to-insert-mode)
-;; add vi-like delete and switch to insert mode
+;; Add vi-like delete and switch to insert mode
 
-(defun my-xah-kill-word ()
-  (interactive)
-  (xah-kill-word)
-  (xah-fly-insert-mode-activate)
+(defmacro create-func-with-insert-mode-switch (func)
+  "Given a function, create another function with name prefixed
+by my- which switches to insert mode after execution"
+  `(defun ,(intern (concat "my-" (symbol-name func))) ()
+     (interactive)
+     (,func)
+     (xah-fly-insert-mode-activate)
+     )
   )
-(defun my-xah-backward-kill-word ()
-  (interactive)
-  (xah-backward-kill-word)
-  (xah-fly-insert-mode-activate)
-  )
+
+(create-func-with-insert-mode-switch xah-kill-word)
+(create-func-with-insert-mode-switch xah-backward-kill-word)
+(create-func-with-insert-mode-switch end-of-line)
+(create-func-with-insert-mode-switch kill-line)
+(create-func-with-insert-mode-switch right-char)
+(create-func-with-insert-mode-switch left-char)
+(create-func-with-insert-mode-switch forward-word)
+(create-func-with-insert-mode-switch backward-word)
+(create-func-with-insert-mode-switch xah-cut-line-or-region)
+
 (defun my-delete-char ()
   (interactive)
   (delete-char 1)
@@ -90,31 +58,6 @@
   (delete-char -1)
   (xah-fly-insert-mode-activate)
   )
-(defun my-end-of-line ()
-  (interactive)
-  (end-of-line)
-  (xah-fly-insert-mode-activate)
-  )
-(defun my-delete-end-of-line ()
-  (interactive)
-  (kill-line)
-  (xah-fly-insert-mode-activate)
-  )
-(defun my-right-char ()
-  (interactive)
-  (right-char)
-  (xah-fly-insert-mode-activate)
-  )
-(defun my-left-char ()
-  (interactive)
-  (left-char)
-  (xah-fly-insert-mode-activate)
-  )
-(defun my-xah-cut-line-or-region ()
-  (interactive)
-  (xah-cut-line-or-region)
-  (xah-fly-insert-mode-activate)
-  )
 
 (define-prefix-command 'vi-type-delete-and-insert-keymap)
 (define-key vi-type-delete-and-insert-keymap "r" #'my-xah-kill-word)
@@ -122,9 +65,11 @@
 (define-key vi-type-delete-and-insert-keymap "d" #'my-delete-char)
 (define-key vi-type-delete-and-insert-keymap "s" #'my-delete-backward-char)
 (define-key vi-type-delete-and-insert-keymap "ø" #'my-end-of-line)
-(define-key vi-type-delete-and-insert-keymap "t" #'my-delete-end-of-line)
+(define-key vi-type-delete-and-insert-keymap "t" #'my-kiil-line)
 (define-key vi-type-delete-and-insert-keymap "l" #'my-right-char)
 (define-key vi-type-delete-and-insert-keymap "j" #'my-left-char)
+(define-key vi-type-delete-and-insert-keymap "u" #'my-backward-word)
+(define-key vi-type-delete-and-insert-keymap "o" #'my-forward-word)
 (define-key vi-type-delete-and-insert-keymap "x" #'my-xah-cut-line-or-region)
 
 (defun add-vi-delete-and-switch-to-insert-mode-bindings ()
@@ -134,6 +79,24 @@
   )
 
 (add-hook 'xah-fly-command-mode-activate-hook 'add-vi-delete-and-switch-to-insert-mode-bindings)
+
+;; extra setting for magit
+(advice-add #'magit-status :after #'xah-fly-insert-mode-activate)
+(add-hook 'magit-mode-hook #'xah-fly-insert-mode-activate)
+
+;; Ivy settings
+(define-key ivy-minibuffer-map (kbd "M-i") 'previous-line)
+(define-key ivy-minibuffer-map (kbd "M-k") 'next-line)
+(define-key ivy-minibuffer-map (kbd "M-I") 'ivy-insert-current)
+
+;; Multiple cursor settings
+(defvar my-mc-keymap (make-sparse-keymap))
+(define-key my-mc-keymap (kbd "k") 'mc/mark-next-like-this)
+(define-key my-mc-keymap (kbd "i") 'mc/unmark-next-like-this)
+(defun my-mc-start ()
+  (interactive)
+  (set-transient-map my-mc-keymap t)
+  )
 
 ;; pdf-vew settings
 (defun setup-pdf-view ()
@@ -153,17 +116,17 @@
 
 (add-hook 'pdf-view-mode-hook 'setup-pdf-view)
 
-;; dired settings
+;; Dired settings
 (defun setup-dired ()
   (interactive)
   (define-key dired-mode-map "i" 'previous-line)
   (define-key dired-mode-map "k" 'next-line))
 (add-hook 'dired-mode-hook 'setup-dired)
 
-;; multiple cursor setting
+;; Multiple cursor setting
 (add-hook 'multiple-cursors-mode-disabled-hook #'xah-fly-command-mode-activate)
 
-;; insert blank line above and below
+;; Insert blank line above and below
 (defun my-insert-blank-line-below ()
   "insert blank line below"
   (interactive)
@@ -186,7 +149,7 @@
 (define-key xah-fly-leader-key-map (kbd "h") 'my-insert-blank-line-above)
 (define-key xah-fly-leader-key-map (kbd "n") 'my-insert-blank-line-below)
 
-;; change binding for moving to beginning and end of buffer
+;; Change binding for moving to beginning and end of buffer
 (add-hook 'xah-fly-command-mode-activate-hook
           (lambda () (define-key xah-fly-key-map "<" 'beginning-of-buffer))
           )
@@ -195,7 +158,11 @@
           (lambda () (define-key xah-fly-key-map "<" nil))
           )
 
-;; helping function
+;; Use which-key package
+(require 'which-key)
+(which-key-mode)
+
+;; Helper function
 (defun my-key-convert ()
   (interactive)
   (let ((str (read-string "char: ")))
