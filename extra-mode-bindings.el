@@ -13,13 +13,8 @@
 (defun my-bindkey-xfk-command-mode ()
   "Define keys for `xah-fly-command-mode-activate-hook'"
   (interactive)
-
   (cond
-
-   ((eq major-mode 'magit-mode)
-    (define-key xah-fly-key-map "q" 'magit-bury-buffer))
-   ;; more major-mode checking here
-    ;; if nothing match, do nothing
+   ((eq major-mode 'magit-mode) (define-key xah-fly-key-map "q" 'magit-bury-buffer))
     (t nil)))
   
 (add-hook 'xah-fly-command-mode-activate-hook 'my-bindkey-xfk-command-mode)
@@ -42,16 +37,22 @@
 
 ;; extra setting for matlab functions
 (advice-add #'switch-to-matlab :after #'xah-fly-insert-mode-activate)
-(advice-add #'set-gud-break :after #'xah-fly-insert-mode-activate)
+(advice-add #'matlab-jump-to-file-at-line :after #'my-xah-fly-command-mode-activate-1)
+(advice-add #'matlab-navigate-dbstack :after #'xah-fly-insert-mode-activate)
 
 ;; extra setting for magit
 (advice-add #'magit-status :after #'xah-fly-insert-mode-activate)
 
-;; extra setting for magit
+;; extra setting for ibuffer
 (advice-add #'ibuffer :after #'xah-fly-insert-mode-activate)
 
-;; extra setting for magit
+;; extra setting for dired
 (advice-add #'dired-jump :after #'xah-fly-insert-mode-activate)
+
+;; extra setting for org
+(add-hook 'org-link-mode-hook #'xah-fly-insert-mode-activate)
+(advice-add #'open-bookmark-buffer-for-editing :after #'xah-fly-command-mode-activate)
+(advice-add #'follow-bookmark-link :after #'xah-fly-command-mode-activate)
 
 ;; switch to insert mode for some major mode
 (defun my-switch-to-insert-mode ()
@@ -59,6 +60,7 @@
   (cond
    ((eq major-mode 'matlab-mode) (xah-fly-command-mode-activate))
    ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'matlab-navigate-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'dired-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'ibuffer-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'magit-mode) (xah-fly-insert-mode-activate))
@@ -88,12 +90,42 @@
   (delete-char -1)
   (xah-fly-insert-mode-activate)
   )
+(defun my-end-of-line ()
+  (interactive)
+  (end-of-line)
+  (xah-fly-insert-mode-activate)
+  )
+(defun my-delete-end-of-line ()
+  (interactive)
+  (kill-line)
+  (xah-fly-insert-mode-activate)
+  )
+(defun my-right-char ()
+  (interactive)
+  (right-char)
+  (xah-fly-insert-mode-activate)
+  )
+(defun my-left-char ()
+  (interactive)
+  (left-char)
+  (xah-fly-insert-mode-activate)
+  )
+(defun my-xah-cut-line-or-region ()
+  (interactive)
+  (xah-cut-line-or-region)
+  (xah-fly-insert-mode-activate)
+  )
 
 (define-prefix-command 'vi-type-delete-and-insert-keymap)
 (define-key vi-type-delete-and-insert-keymap "r" #'my-xah-kill-word)
 (define-key vi-type-delete-and-insert-keymap "e" #'my-xah-backward-kill-word)
 (define-key vi-type-delete-and-insert-keymap "d" #'my-delete-char)
 (define-key vi-type-delete-and-insert-keymap "s" #'my-delete-backward-char)
+(define-key vi-type-delete-and-insert-keymap "ø" #'my-end-of-line)
+(define-key vi-type-delete-and-insert-keymap "t" #'my-delete-end-of-line)
+(define-key vi-type-delete-and-insert-keymap "l" #'my-right-char)
+(define-key vi-type-delete-and-insert-keymap "j" #'my-left-char)
+(define-key vi-type-delete-and-insert-keymap "x" #'my-xah-cut-line-or-region)
 
 (defun add-vi-delete-and-switch-to-insert-mode-bindings ()
   (interactive)
