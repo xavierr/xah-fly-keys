@@ -2,9 +2,10 @@
 (define-key key-translation-map (kbd "ESC") (kbd "<insert>"))
 
 ;; Switch by default to insert mode for some major modes
-(defun my-switch-to-insert-mode ()
+(defun my-switch-to-default-mode ()
   (interactive)
   (cond
+   ((eq major-mode 'matlab-mode) (xah-fly-command-mode-activate))
    ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'matlab-navigate-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'dired-mode) (xah-fly-insert-mode-activate))
@@ -13,8 +14,14 @@
    ((eq major-mode 'magit-status-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'magit-popup-mode) (xah-fly-insert-mode-activate))
    (t nil))
-   )
-(add-hook 'buffer-list-update-hook #'my-switch-to-insert-mode)
+  )
+
+(defun my-switch-to-default-mode-1 (dummy)
+  (my-switch-to-default-mode)
+  )
+
+(add-hook 'my-windmove-hook #'my-switch-to-default-mode)
+;; (add-hook 'buffer-list-update-hook #'my-switch-to-default-mode)
 
 ;; Extra keybindings for specific major modes in command mode
 (defun my-bindkey-xfk-command-mode ()
@@ -40,6 +47,7 @@ by my- which switches to insert mode after execution"
 
 (create-func-with-insert-mode-switch xah-kill-word)
 (create-func-with-insert-mode-switch xah-backward-kill-word)
+(create-func-with-insert-mode-switch xah-beginning-of-line-or-block)
 (create-func-with-insert-mode-switch end-of-line)
 (create-func-with-insert-mode-switch kill-line)
 (create-func-with-insert-mode-switch right-char)
@@ -64,8 +72,9 @@ by my- which switches to insert mode after execution"
 (define-key vi-type-delete-and-insert-keymap "e" #'my-xah-backward-kill-word)
 (define-key vi-type-delete-and-insert-keymap "d" #'my-delete-char)
 (define-key vi-type-delete-and-insert-keymap "s" #'my-delete-backward-char)
+(define-key vi-type-delete-and-insert-keymap "h" #'my-xah-beginning-of-line-or-block)
 (define-key vi-type-delete-and-insert-keymap "ø" #'my-end-of-line)
-(define-key vi-type-delete-and-insert-keymap "t" #'my-kiil-line)
+(define-key vi-type-delete-and-insert-keymap "t" #'my-kill-line)
 (define-key vi-type-delete-and-insert-keymap "l" #'my-right-char)
 (define-key vi-type-delete-and-insert-keymap "j" #'my-left-char)
 (define-key vi-type-delete-and-insert-keymap "u" #'my-backward-word)
@@ -81,6 +90,30 @@ by my- which switches to insert mode after execution"
 
 (add-hook 'xah-fly-command-mode-activate-hook 'add-vi-delete-and-switch-to-insert-mode-bindings)
 
+;; utility: versions of xah-fly-command-mode-activate with arguments
+(defun my-xah-fly-command-mode-activate-2 (&optional a b)
+  "Version that takes argument - to be used in advice"
+  (xah-fly-command-mode-activate)
+  )
+(defun my-xah-fly-command-mode-activate-1 (&optional a)
+  "Version that takes argument - to be used in advice"
+  (xah-fly-command-mode-activate)
+  )
+
+;; extra setting for company
+(define-key company-active-map (kbd "M-i") 'company-select-previous-or-abort)
+(define-key company-active-map (kbd "M-k") 'company-select-next-or-abort)
+(defun my-switch-to-default-mode-1 (dummy)
+  (my-switch-to-default-mode)
+  )
+;; (add-hook 'company-completion-started-hook #'my-xah-fly-insert-mode-activate-1)
+(add-hook 'company-completion-cancelled-hook #'my-switch-to-default-mode-1)
+(add-hook 'company-completion-finished-hook  #'my-switch-to-default-mode-1)
+
+;; extra setting for matlab functions
+(advice-add #'matlab-jump-to-file-at-line :after #'my-xah-fly-command-mode-activate-1)
+(advice-add #'matlab-navigate-dbstack :after #'xah-fly-insert-mode-activate)
+
 ;; extra setting for magit
 (advice-add #'magit-status :after #'xah-fly-insert-mode-activate)
 (add-hook 'magit-mode-hook #'xah-fly-insert-mode-activate)
@@ -89,6 +122,11 @@ by my- which switches to insert mode after execution"
 (define-key ivy-minibuffer-map (kbd "M-i") 'previous-line)
 (define-key ivy-minibuffer-map (kbd "M-k") 'next-line)
 (define-key ivy-minibuffer-map (kbd "M-I") 'ivy-insert-current)
+(advice-add 'ivy--switch-buffer-action :after 'my-switch-to-default-mode-1)
+(advice-add 'ivy--switch-buffer-other-window-action :after 'my-switch-to-default-mode-1)
+(advice-add 'ivy--find-file-action :after 'my-switch-to-default-mode-1)
+(advice-add 'ivy--kill-buffer-action :after 'my-switch-to-default-mode-1)
+(advice-add 'swiper--action :after 'my-switch-to-default-mode-1)
 
 ;; Multiple cursor settings
 (defvar my-mc-keymap (make-sparse-keymap))
