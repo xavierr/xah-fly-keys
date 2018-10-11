@@ -159,7 +159,10 @@ by my- which switches to insert mode after execution"
 (defun setup-dired ()
   (interactive)
   (define-key dired-mode-map "i" 'previous-line)
-  (define-key dired-mode-map "k" 'next-line))
+  (define-key dired-mode-map "k" 'next-line)
+  (xah-fly-insert-mode-activate)
+  )
+
 (add-hook 'dired-mode-hook 'setup-dired)
 
 ;; Multiple cursor setting
