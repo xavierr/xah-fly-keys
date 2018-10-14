@@ -113,6 +113,7 @@ by my- which switches to insert mode after execution"
 ;; extra setting for matlab functions
 (advice-add #'matlab-jump-to-file-at-line :after #'my-xah-fly-command-mode-activate-1)
 (advice-add #'matlab-navigate-dbstack :after #'xah-fly-insert-mode-activate)
+(advice-add #'switch-to-matlab :after #'xah-fly-insert-mode-activate)
 
 ;; extra setting for magit
 (advice-add #'magit-status :after #'xah-fly-insert-mode-activate)
