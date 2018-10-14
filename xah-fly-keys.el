@@ -2620,6 +2620,31 @@ Version 2015-04-09"
     (isearch-mode t)
     (isearch-yank-string (buffer-substring-no-properties $p1 $p2))))
 
+(defun xah-query-replace-current-word ()
+  "Call `isearch' on current word or text selection.
+“word” here is A to Z, a to z, and hyphen 「-」 and underline 「_」, independent of syntax table.
+URL `http://ergoemacs.org/emacs/modernization_isearch.html'
+Version 2015-04-09"
+  (interactive)
+  (let ( $p1 $p2 $wi $wr)
+    (if (use-region-p)
+        (progn
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
+      (save-excursion
+        (skip-chars-backward "-_A-Za-z0-9")
+        (setq $p1 (point))
+        (right-char)
+        (skip-chars-forward "-_A-Za-z0-9")
+        (setq $p2 (point))))
+    (setq mark-active nil)
+    (when (< $p1 (point))
+      (goto-char $p1))
+    (setq $wi (buffer-substring-no-properties $p1 $p2))
+    (setq $wr (read-from-minibuffer (concat "replace " $wi " with:")))
+    (query-replace $wi $wr)
+    ))
+
 (defun xah-show-in-desktop ()
   "Show current file in desktop.
  (Mac Finder, Windows Explorer, Linux file manager)
@@ -3202,7 +3227,7 @@ Version 2019-02-12"
    ("n" . xah-new-empty-buffer)
    ("o" . save-buffer)
    ("p" . xah-open-last-closed)
-   ("f" . xah-open-recently-closed)
+   ("f" . xah-query-replace-current-word)
    ("y" . xah-list-recently-closed)
    ("r" . find-file)
    ))
