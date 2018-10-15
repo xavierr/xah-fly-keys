@@ -166,6 +166,16 @@ by my- which switches to insert mode after execution"
 
 (add-hook 'dired-mode-hook 'setup-dired)
 
+;; ibuffer settings
+(defun setup-ibuffer ()
+  (interactive)
+  (define-key ibuffer-mode-map "i" 'previous-line)
+  (define-key ibuffer-mode-map "k" 'next-line)
+  (xah-fly-insert-mode-activate)
+  )
+
+(add-hook 'ibuffer-mode-hook 'setup-ibuffer)
+
 ;; Multiple cursor setting
 (add-hook 'multiple-cursors-mode-disabled-hook #'xah-fly-command-mode-activate)
 
