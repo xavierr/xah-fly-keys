@@ -454,6 +454,24 @@ Version 2015-06-10"
                (kill-region (region-beginning) (region-end) t)
              (kill-region (line-beginning-position) (line-beginning-position 2))))))
 
+(defun xav-append-copy-line-or-region ()
+  (interactive)
+  (append-next-kill)
+  (if (use-region-p)
+      ()
+    (kill-append "\n" nil))
+  (xah-copy-line-or-region)
+  )
+
+(defun xav-append-cut-line-or-region ()
+  (interactive)
+  (append-next-kill)
+  (if (use-region-p)
+      ()
+    (kill-append "\n" nil))
+  (xah-cut-line-or-region)
+  )
+
 (defun xah-copy-all-or-region ()
   "Put the whole buffer content to `kill-ring', or text selection if there's one.
 Respects `narrow-to-region'.
@@ -3778,6 +3796,8 @@ Version 2017-01-21"
 
     (define-key xah-fly-key-map (kbd "2") 'my-mc-start)
     (define-key xah-fly-key-map (kbd "F") 'isearch-backward)
+    (define-key xah-fly-key-map (kbd "C") 'xav-append-copy-line-or-region)
+    (define-key xah-fly-key-map (kbd "X") 'xav-append-copy-line-or-region)
     (define-key xah-fly-key-map (kbd "d") 'delete-char)
     (define-key xah-fly-key-map (kbd "ø") 'xah-end-of-line-or-block)
     (define-key xah-fly-key-map (kbd "M-i") 'my-windmove-up)
@@ -3887,6 +3907,8 @@ Version 2018-05-07"
      ;;
      ))
   (define-key xah-fly-key-map (kbd "F") nil)
+  (define-key xah-fly-key-map (kbd "C") nil)
+  (define-key xah-fly-key-map (kbd "X") nil)
   (define-key xah-fly-key-map (kbd "M-i") nil)
   (define-key xah-fly-key-map (kbd "M-k") nil)
   (define-key xah-fly-key-map (kbd "M-j") nil)
