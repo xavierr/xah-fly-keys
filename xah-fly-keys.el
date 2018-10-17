@@ -3830,6 +3830,7 @@ Version 2017-01-21"
     (define-key xah-fly-key-map (kbd "M-i") 'previous-line)
 
     (define-key xah-fly-key-map (kbd "2") 'my-mc-start)
+    (define-key xah-fly-key-map (kbd "F") 'isearch-backward)
     (define-key xah-fly-key-map (kbd "d") 'delete-char)
     (define-key xah-fly-key-map (kbd "ø") 'xah-end-of-line-or-block)
     (define-key xah-fly-key-map (kbd "M-i") 'my-windmove-up)
@@ -3938,6 +3939,7 @@ Version 2018-05-07"
 
      ;;
      ))
+  (define-key xah-fly-key-map (kbd "F") nil)
   (define-key xah-fly-key-map (kbd "M-i") nil)
   (define-key xah-fly-key-map (kbd "M-k") nil)
   (define-key xah-fly-key-map (kbd "M-j") nil)
