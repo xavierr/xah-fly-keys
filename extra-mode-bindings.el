@@ -85,7 +85,6 @@ by my- which switches to insert mode after execution"
   (interactive)
   (define-key xah-fly-key-map "w" 'vi-type-delete-and-insert-keymap)
   (define-key xah-fly-key-map "a" 'vi-type-delete-and-insert-keymap)
-  (define-key xah-fly-key-map (kbd "<home>") 'vi-type-delete-and-insert-keymap)
   )
 
 (add-hook 'xah-fly-command-mode-activate-hook 'add-vi-delete-and-switch-to-insert-mode-bindings)
@@ -138,6 +137,9 @@ by my- which switches to insert mode after execution"
   (set-transient-map my-mc-keymap t)
   )
 
+;; extra setting for backward search
+(define-key isearch-mode-map  (kbd "<home>") 'isearch-repeat-backward)
+(define-key isearch-mode-map  (kbd "<tab>") 'isearch-repeat-forward)
 ;; pdf-vew settings
 (defun setup-pdf-view ()
   (interactive)
