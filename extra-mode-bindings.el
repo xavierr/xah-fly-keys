@@ -83,7 +83,6 @@ by my- which switches to insert mode after execution"
 
 (defun add-vi-delete-and-switch-to-insert-mode-bindings ()
   (interactive)
-  (define-key xah-fly-key-map "w" 'vi-type-delete-and-insert-keymap)
   (define-key xah-fly-key-map "a" 'vi-type-delete-and-insert-keymap)
   )
 
@@ -136,6 +135,23 @@ by my- which switches to insert mode after execution"
   (interactive)
   (set-transient-map my-mc-keymap t)
   )
+
+;; Scroll up/down settings
+(defvar my-scroll-keymap (make-sparse-keymap))
+(define-key my-scroll-keymap (kbd "i") 'scroll-down-command)
+(define-key my-scroll-keymap (kbd "k") 'scroll-up-command)
+(defun my-scroll-start ()
+  (interactive)
+  (set-transient-map my-scroll-keymap t)
+  )
+
+(add-hook 'xah-fly-command-mode-activate-hook
+          (lambda () (define-key xah-fly-key-map "w" 'my-scroll-start))
+          )
+(add-hook 'xah-fly-insert-mode-activate-hook
+          (lambda () (define-key xah-fly-key-map "w" nil))
+          )
+
 
 ;; extra setting for backward search
 (define-key isearch-mode-map  (kbd "<home>") 'isearch-repeat-backward)
@@ -203,15 +219,6 @@ by my- which switches to insert mode after execution"
 
 (define-key xah-fly-leader-key-map (kbd "h") 'my-insert-blank-line-above)
 (define-key xah-fly-leader-key-map (kbd "n") 'my-insert-blank-line-below)
-
-;; Change binding for moving to beginning and end of buffer
-(add-hook 'xah-fly-command-mode-activate-hook
-          (lambda () (define-key xah-fly-key-map "<" 'beginning-of-buffer))
-          )
-(define-key xah-fly-leader-key-map (kbd "<") 'end-of-buffer)
-(add-hook 'xah-fly-insert-mode-activate-hook
-          (lambda () (define-key xah-fly-key-map "<" nil))
-          )
 
 ;; Use which-key package
 (require 'which-key)
