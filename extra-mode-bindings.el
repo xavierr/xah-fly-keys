@@ -99,6 +99,12 @@ by my- which switches to insert mode after execution"
   )
 
 ;; extra setting for company
+
+(define-key yas-minor-mode-map (kbd "<tab>") nil)
+(define-key yas-minor-mode-map (kbd "TAB") nil)
+(define-key yas-minor-mode-map (kbd "<backtab>") #'yas-expand)
+
+;; extra setting for company
 (define-key company-active-map (kbd "M-i") 'company-select-previous-or-abort)
 (define-key company-active-map (kbd "M-k") 'company-select-next-or-abort)
 (defun my-switch-to-default-mode-1 (dummy)
