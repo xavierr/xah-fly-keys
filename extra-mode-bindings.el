@@ -6,6 +6,8 @@
   (interactive)
   (cond
    ((eq major-mode 'matlab-mode) (xah-fly-command-mode-activate))
+   ((eq major-mode 'python-mode) (xah-fly-command-mode-activate))
+   ((eq major-mode 'emacs-lisp-mode) (xah-fly-command-mode-activate))
    ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'matlab-navigate-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'dired-mode) (xah-fly-insert-mode-activate))
@@ -189,6 +191,8 @@ by my- which switches to insert mode after execution"
   )
 
 (add-hook 'dired-mode-hook 'setup-dired)
+(advice-add 'dired-find-file :after 'my-switch-to-default-mode)
+(advice-add 'dired-jump :after 'my-switch-to-default-mode)
 
 ;; ibuffer settings
 (defun setup-ibuffer ()
