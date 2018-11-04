@@ -31,7 +31,9 @@
   (interactive)
   (cond
    ((eq major-mode 'magit-mode) (define-key xah-fly-key-map "q" 'magit-bury-buffer))
-    (t nil)))
+   ((eq major-mode 'matlab-mode) (define-key xah-fly-key-map (kbd "æ") 'matlab-debug-keymap))
+   ((eq major-mode 'matlab-shell-mode) (define-key xah-fly-key-map (kbd "æ") 'matlab-shell-debug-keymap))
+   (t nil)))
   
 (add-hook 'xah-fly-command-mode-activate-hook 'my-bindkey-xfk-command-mode)
   
