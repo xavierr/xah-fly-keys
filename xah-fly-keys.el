@@ -3670,6 +3670,7 @@ Version 2019-02-12"
 
   (progn
     (define-key xah-fly-key-map (kbd "<insert>") 'xah-fly-command-mode-activate)
+    (define-key xah-fly-key-map (kbd "<insertchar>") 'xah-fly-command-mode-activate)
     (define-key xah-fly-key-map (kbd "<f1>") 'xah-fly-command-mode-activate)
     (define-key xah-fly-key-map (kbd "<menu>") 'xah-fly-command-mode-activate)
     (define-key xah-fly-key-map (kbd "<f8>") 'xah-fly-command-mode-activate-no-hook)
@@ -4045,14 +4046,29 @@ Version 2017-07-07"
 ;; (setq xah-fly-timer-id (run-with-idle-timer 20 t 'xah-fly-command-mode-activate))
 ;; (cancel-timer xah-fly-timer-id)
 
+(defvar xah-fly-insert-state-before-minibuffer-q nil
+  "value xah-fly-insert-state-q before entering minibuffer")
+
+(defun xah-minibuffer-setup-hook ()
+  (setq xah-fly-insert-state-before-minibuffer-q xah-fly-insert-state-q)
+  (xah-fly-insert-mode-activate)
+  )
+
+(defun xah-minibuffer-exit-hook ()
+  (if xah-fly-insert-state-before-minibuffer-q
+      (xah-fly-insert-mode-activate)
+    (xah-fly-command-mode-activate)
+    )
+  )
+
 (define-minor-mode xah-fly-keys
   "A modal keybinding set, like vim, but based on ergonomic principles, like Dvorak layout.
 URL `http://ergoemacs.org/misc/ergoemacs_vi_mode.html'"
   t "∑flykeys" xah-fly-key-map
   (progn
     ;; when going into minibuffer, switch to insertion mode.
-    (add-hook 'minibuffer-setup-hook 'xah-fly-insert-mode-activate)
-    (add-hook 'minibuffer-exit-hook 'xah-fly-command-mode-activate)
+    (add-hook 'minibuffer-setup-hook 'xah-minibuffer-setup-hook)
+    (add-hook 'minibuffer-exit-hook 'xah-minibuffer-exit-hook)
     ;; (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
     ;; when in shell mode, switch to insertion mode.
     ;; (add-hook 'shell-mode-hook 'xah-fly-insert-mode-activate)

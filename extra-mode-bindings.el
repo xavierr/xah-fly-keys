@@ -1,5 +1,5 @@
 ;; Use ESC key to switch to command mode
-(define-key key-translation-map (kbd "ESC") (kbd "<insert>"))
+;; (define-key key-translation-map (kbd "ESC") (kbd "<insert>"))
 
 ;; Switch by default to insert mode for some major modes
 (defun my-switch-to-default-mode ()
@@ -9,12 +9,14 @@
    ((eq major-mode 'python-mode) (xah-fly-command-mode-activate))
    ((eq major-mode 'emacs-lisp-mode) (xah-fly-command-mode-activate))
    ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'inferior-python-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'matlab-navigate-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'dired-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'ibuffer-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'magit-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'magit-status-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'magit-popup-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'pdf-view-mode) (xah-fly-insert-mode-activate))
    (t nil))
   )
 
@@ -111,12 +113,9 @@ by my- which switches to insert mode after execution"
 ;; extra setting for company
 (define-key company-active-map (kbd "M-i") 'company-select-previous-or-abort)
 (define-key company-active-map (kbd "M-k") 'company-select-next-or-abort)
-(defun my-switch-to-default-mode-1 (dummy)
-  (my-switch-to-default-mode)
-  )
 ;; (add-hook 'company-completion-started-hook #'my-xah-fly-insert-mode-activate-1)
-(add-hook 'company-completion-cancelled-hook #'my-switch-to-default-mode-1)
-(add-hook 'company-completion-finished-hook  #'my-switch-to-default-mode-1)
+;; (add-hook 'company-completion-cancelled-hook #'my-switch-to-default-mode-1)
+;; (add-hook 'company-completion-finished-hook  #'my-switch-to-default-mode-1)
 
 ;; extra setting for matlab functions
 (advice-add #'matlab-jump-to-file-at-line :after #'my-xah-fly-command-mode-activate-1)
@@ -162,6 +161,24 @@ by my- which switches to insert mode after execution"
           (lambda () (define-key xah-fly-key-map "w" nil))
           )
 
+;; Scroll delete/space setting
+(defvar my-delete-and-space-keymap (make-sparse-keymap))
+(defun my-insert-space ()
+  (interactive)
+  (insert " ")
+  )
+(define-key my-delete-and-space-keymap (kbd "SPC") #'my-insert-space)
+(defun my-delete-and-space-start ()
+  (interactive)
+  (set-transient-map my-delete-and-space-keymap t)
+  )
+
+(add-hook 'xah-fly-command-mode-activate-hook
+          (lambda () (define-key xah-fly-key-map "å" 'my-delete-and-space-start))
+          )
+(add-hook 'xah-fly-insert-mode-activate-hook
+          (lambda () (define-key xah-fly-key-map "å" nil))
+          )
 
 ;; extra setting for backward search
 (define-key isearch-mode-map  (kbd "<home>") 'isearch-repeat-backward)
@@ -196,6 +213,8 @@ by my- which switches to insert mode after execution"
 (advice-add 'dired-find-file :after 'my-switch-to-default-mode)
 (advice-add 'dired-jump :after 'my-switch-to-default-mode)
 
+
+
 ;; ibuffer settings
 (defun setup-ibuffer ()
   (interactive)
@@ -204,7 +223,7 @@ by my- which switches to insert mode after execution"
   (xah-fly-insert-mode-activate)
   )
 
-(add-hook 'ibuffer-mode-hook 'setup-ibuffer)
+(add-hook 'ibuffer-hook #'setup-ibuffer)
 
 ;; Multiple cursor setting
 (add-hook 'multiple-cursors-mode-disabled-hook #'xah-fly-command-mode-activate)
