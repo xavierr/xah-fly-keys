@@ -24,6 +24,10 @@
   (my-switch-to-default-mode)
   )
 
+(defun my-switch-to-default-mode-1-opt (dummy1 &optional dummy2)
+  (my-switch-to-default-mode)
+  )
+
 (add-hook 'my-windmove-hook #'my-switch-to-default-mode)
 ;; (add-hook 'buffer-list-update-hook #'my-switch-to-default-mode)
 
@@ -61,6 +65,8 @@ by my- which switches to insert mode after execution"
 (create-func-with-insert-mode-switch forward-word)
 (create-func-with-insert-mode-switch backward-word)
 (create-func-with-insert-mode-switch xah-cut-line-or-region)
+(create-func-with-insert-mode-switch xah-cut-line-or-region)
+(create-func-with-insert-mode-switch yank)
 
 (defun my-delete-char ()
   (interactive)
@@ -86,6 +92,7 @@ by my- which switches to insert mode after execution"
 (define-key vi-type-delete-and-insert-keymap "u" #'my-backward-word)
 (define-key vi-type-delete-and-insert-keymap "o" #'my-forward-word)
 (define-key vi-type-delete-and-insert-keymap "x" #'my-xah-cut-line-or-region)
+(define-key vi-type-delete-and-insert-keymap "v" #'my-yank)
 
 (defun add-vi-delete-and-switch-to-insert-mode-bindings ()
   (interactive)
@@ -104,8 +111,12 @@ by my- which switches to insert mode after execution"
   (xah-fly-command-mode-activate)
   )
 
-;; extra setting for company
+;; Advice some functions
+(advice-add 'find-file :after 'my-switch-to-default-mode-1-opt)
+(advice-add 'kill-buffer :after 'my-switch-to-default-mode-1-opt)
+;; (advice-remove 'kill-buffer 'my-switch-to-default-mode)
 
+;; extra setting for company
 (define-key yas-minor-mode-map (kbd "<tab>") nil)
 (define-key yas-minor-mode-map (kbd "TAB") nil)
 (define-key yas-minor-mode-map (kbd "<backtab>") #'yas-expand)
@@ -132,7 +143,6 @@ by my- which switches to insert mode after execution"
 (define-key ivy-minibuffer-map (kbd "M-I") 'ivy-insert-current)
 (advice-add 'ivy--switch-buffer-action :after 'my-switch-to-default-mode-1)
 (advice-add 'ivy--switch-buffer-other-window-action :after 'my-switch-to-default-mode-1)
-(advice-add 'ivy--find-file-action :after 'my-switch-to-default-mode-1)
 (advice-add 'ivy--kill-buffer-action :after 'my-switch-to-default-mode-1)
 (advice-add 'swiper--action :after 'my-switch-to-default-mode-1)
 
@@ -278,3 +288,7 @@ by my- which switches to insert mode after execution"
 (provide 'extra-mode-bindings)
 
  
+(defun reset-escape-key ()
+  (interactive)
+  (shell-command "xmodmap /home/xavier/.Xmodmap")
+  )
