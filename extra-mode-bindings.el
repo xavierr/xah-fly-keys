@@ -113,8 +113,8 @@ by my- which switches to insert mode after execution"
 
 ;; Advice some functions
 (advice-add 'find-file :after 'my-switch-to-default-mode-1-opt)
-(advice-add 'kill-buffer :after 'my-switch-to-default-mode-1-opt)
-;; (advice-remove 'kill-buffer 'my-switch-to-default-mode)
+(advice-add 'xah-close-current-buffer :after 'my-switch-to-default-mode)
+;; (advice-remove 'kill-buffer 'my-switch-to-default-mode-1-opt)
 
 ;; extra setting for company
 (define-key yas-minor-mode-map (kbd "<tab>") nil)
