@@ -138,6 +138,8 @@ by my- which switches to insert mode after execution"
 ;; extra setting for magit
 (advice-add #'magit-status :after #'xah-fly-insert-mode-activate)
 (add-hook 'magit-mode-hook #'xah-fly-insert-mode-activate)
+(define-key magit-file-section-map "a" nil)
+(define-key magit-hunk-section-map "a" nil)
 
 ;; Ivy settings
 (define-key ivy-minibuffer-map (kbd "M-i") 'previous-line)
@@ -167,11 +169,11 @@ by my- which switches to insert mode after execution"
   (set-transient-map my-scroll-keymap t)
   )
 
-(add-hook 'xah-fly-command-mode-activate-hook
-          (lambda () (define-key xah-fly-key-map "w" 'my-scroll-start))
+(add-hook 'xah-fly-command-mode-activate-hoon
+          (lambda () (define-key xah-fly-key-map "n" 'my-scroll-start))
           )
 (add-hook 'xah-fly-insert-mode-activate-hook
-          (lambda () (define-key xah-fly-key-map "w" nil))
+          (lambda () (define-key xah-fly-key-map "n" nil))
           )
 
 ;; Scroll delete/space setting
