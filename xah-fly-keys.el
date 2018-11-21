@@ -3768,7 +3768,7 @@ Version 2017-01-21"
      ("9" . xah-select-text-in-quote)
      ("0" . xah-pop-local-mark-ring)
 
-     ("b" . xah-fly-insert-mode-activate)
+     ("a" . xah-fly-insert-mode-activate)
      ("c" . previous-line)
      ("d" . xah-beginning-of-line-or-block)
      ("e" . delete-char)
@@ -3806,8 +3806,8 @@ Version 2017-01-21"
     (define-key xah-fly-key-map (kbd "M-j") 'my-windmove-left)
     (define-key xah-fly-key-map (kbd "M-l") 'my-windmove-right)
 
-  (define-key xah-fly-key-map (kbd "a")
-    (if (fboundp 'smex) 'smex (if (fboundp 'helm-M-x) 'helm-M-x 'execute-extended-command)))
+  ;; (define-key xah-fly-key-map (kbd "a")
+    ;; (if (fboundp 'smex) 'smex (if (fboundp 'helm-M-x) 'helm-M-x 'execute-extended-command)))
 
   ;; (when xah-fly-swapped-1-8-and-2-7-p
   ;;     (xah-fly--define-keys
