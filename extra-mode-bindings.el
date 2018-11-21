@@ -116,7 +116,7 @@ by my- which switches to insert mode after execution"
 (advice-add 'xah-close-current-buffer :after 'my-switch-to-default-mode)
 ;; (advice-remove 'kill-buffer 'my-switch-to-default-mode-1-opt)
 
-;; extra setting for company
+;; extra setting for yas
 (define-key yas-minor-mode-map (kbd "<tab>") nil)
 (define-key yas-minor-mode-map (kbd "TAB") nil)
 (define-key yas-minor-mode-map (kbd "<backtab>") #'yas-expand)
@@ -154,6 +154,7 @@ by my- which switches to insert mode after execution"
   (interactive)
   (set-transient-map my-mc-keymap t)
   )
+(add-hook 'multiple-cursors-mode-disabled-hook #'xah-fly-command-mode-activate)
 
 ;; Scroll up/down settings
 (defvar my-scroll-keymap (make-sparse-keymap))
@@ -193,6 +194,7 @@ by my- which switches to insert mode after execution"
 ;; extra setting for backward search
 (define-key isearch-mode-map  (kbd "<home>") 'isearch-repeat-backward)
 (define-key isearch-mode-map  (kbd "<tab>") 'isearch-repeat-forward)
+
 ;; pdf-vew settings
 (defun setup-pdf-view ()
   (interactive)
@@ -224,8 +226,6 @@ by my- which switches to insert mode after execution"
 (advice-add 'dired-find-file :after 'my-switch-to-default-mode)
 (advice-add 'dired-jump :after 'my-switch-to-default-mode)
 
-
-
 ;; ibuffer settings
 (defun setup-ibuffer ()
   (interactive)
@@ -233,11 +233,7 @@ by my- which switches to insert mode after execution"
   (define-key ibuffer-mode-map "k" 'next-line)
   (xah-fly-insert-mode-activate)
   )
-
 (add-hook 'ibuffer-hook #'setup-ibuffer)
-
-;; Multiple cursor setting
-(add-hook 'multiple-cursors-mode-disabled-hook #'xah-fly-command-mode-activate)
 
 ;; Insert blank line above and below
 (defun my-insert-blank-line-below ()
@@ -285,10 +281,10 @@ by my- which switches to insert mode after execution"
         @charstr
         ))))
 
-(provide 'extra-mode-bindings)
-
- 
 (defun reset-escape-key ()
   (interactive)
   (shell-command "xmodmap /home/xavier/.Xmodmap")
   )
+
+(provide 'extra-mode-bindings)
+ 
