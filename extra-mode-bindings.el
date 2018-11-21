@@ -67,6 +67,7 @@ by my- which switches to insert mode after execution"
 (create-func-with-insert-mode-switch xah-cut-line-or-region)
 (create-func-with-insert-mode-switch xah-cut-line-or-region)
 (create-func-with-insert-mode-switch yank)
+(create-func-with-insert-mode-switch end-of-buffer)
 
 (defun my-delete-char ()
   (interactive)
@@ -93,6 +94,7 @@ by my- which switches to insert mode after execution"
 (define-key vi-type-delete-and-insert-keymap "o" #'my-forward-word)
 (define-key vi-type-delete-and-insert-keymap "x" #'my-xah-cut-line-or-region)
 (define-key vi-type-delete-and-insert-keymap "v" #'my-yank)
+(define-key vi-type-delete-and-insert-keymap "z" #'my-end-of-buffer)
 
 (defun add-vi-delete-and-switch-to-insert-mode-bindings ()
   (interactive)
