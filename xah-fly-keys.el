@@ -3851,7 +3851,7 @@ Version 2017-01-21"
     (define-key xah-fly-key-map (kbd "2") 'my-mc-start)
     (define-key xah-fly-key-map (kbd "F") 'isearch-backward)
     (define-key xah-fly-key-map (kbd "C") 'xav-append-copy-line-or-region)
-    (define-key xah-fly-key-map (kbd "X") 'xav-append-copy-line-or-region)
+    (define-key xah-fly-key-map (kbd "X") 'xav-append-cut-line-or-region)
     (define-key xah-fly-key-map (kbd "d") 'delete-char)
     (define-key xah-fly-key-map (kbd "ø") 'xah-end-of-line-or-block)
     (define-key xah-fly-key-map (kbd "M-i") 'my-windmove-up)

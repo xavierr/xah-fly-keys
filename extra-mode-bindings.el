@@ -212,6 +212,8 @@ by my- which switches to insert mode after execution"
   (define-key pdf-view-mode-map "g" 'pdf-view-goto-page)
   (define-key pdf-view-mode-map "i" 'previous-line)
   (define-key pdf-view-mode-map "k" 'next-line)
+  (define-key pdf-view-mode-map "j" 'image-backward-hscroll)
+  (define-key pdf-view-mode-map "l" 'image-forward-hscroll)
   (define-key pdf-view-mode-map "a" 'pdf-annot-add-highlight-markup-annotation)
   (define-key pdf-view-mode-map "\C-f" 'pdf-links-isearch-link)
   (define-key pdf-view-mode-map "f" 'isearch-forward)
