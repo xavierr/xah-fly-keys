@@ -3768,7 +3768,7 @@ Version 2017-01-21"
      ("9" . xah-select-text-in-quote)
      ("0" . xah-pop-local-mark-ring)
 
-     ("a" . xah-fly-insert-mode-activate)
+     ("+" . xah-fly-insert-mode-activate)
      ("c" . previous-line)
      ("d" . xah-beginning-of-line-or-block)
      ("e" . delete-char)
