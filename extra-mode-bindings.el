@@ -95,7 +95,7 @@ by my- which switches to insert mode after execution"
 (define-key vi-type-delete-and-insert-keymap "x" #'my-xah-cut-line-or-region)
 (define-key vi-type-delete-and-insert-keymap "v" #'my-yank)
 (define-key vi-type-delete-and-insert-keymap "z" #'my-end-of-buffer)
-(define-key vi-type-delete-and-insert-keymap (kbd "SPC") #'xah-fly-insert-mode-activate)
+(define-key vi-type-delete-and-insert-keymap "i" #'xah-fly-insert-mode-activate)
 
 (defun add-vi-delete-and-switch-to-insert-mode-bindings ()
   (interactive)
