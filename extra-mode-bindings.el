@@ -41,6 +41,10 @@
   )
 
 (add-hook 'my-windmove-hook #'my-window-switch-setup)
+(defun my-switch-to-default-mode-1-1-opt (&optional dummy1 dummy2)
+  (my-switch-to-default-mode)
+  )
+
 ;; (add-hook 'buffer-list-update-hook #'my-switch-to-default-mode)
 
 ;; Extra keybindings for specific major modes in command mode
@@ -128,6 +132,7 @@ by my- which switches to insert mode after execution"
 
 ;; Advice some functions
 (advice-add 'find-file :after 'my-switch-to-default-mode-1-opt)
+(advice-add 'quit-window :after 'my-switch-to-default-mode-1-1-opt)
 (advice-add 'xah-close-current-buffer :after 'my-switch-to-default-mode)
 ;; (advice-remove 'kill-buffer 'my-switch-to-default-mode-1-opt)
 
