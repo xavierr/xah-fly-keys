@@ -185,9 +185,16 @@ by my- which switches to insert mode after execution"
 (defvar my-scroll-keymap (make-sparse-keymap))
 (define-key my-scroll-keymap (kbd "i") 'scroll-down-command)
 (define-key my-scroll-keymap (kbd "k") 'scroll-up-command)
+(define-key my-scroll-keymap (kbd "RET") 'my-exit-scroll-keymap)
+
+(defun my-exit-scroll-keymap ()
+  (interactive)
+  (out-of-scroll)
+  )
+
 (defun my-scroll-start ()
   (interactive)
-  (set-transient-map my-scroll-keymap t)
+  (fset 'out-of-scroll (set-transient-map my-scroll-keymap t))
   )
 
 (add-hook 'xah-fly-command-mode-activate-hook
