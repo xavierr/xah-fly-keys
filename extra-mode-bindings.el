@@ -185,7 +185,7 @@ by my- which switches to insert mode after execution"
 (defvar my-scroll-keymap (make-sparse-keymap))
 (define-key my-scroll-keymap (kbd "i") 'scroll-down-command)
 (define-key my-scroll-keymap (kbd "k") 'scroll-up-command)
-(define-key my-scroll-keymap (kbd "RET") 'my-exit-scroll-keymap)
+(define-key my-scroll-keymap (kbd "<return>") 'my-exit-scroll-keymap)
 
 (defun my-exit-scroll-keymap ()
   (interactive)
