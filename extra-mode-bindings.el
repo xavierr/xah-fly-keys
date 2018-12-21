@@ -28,6 +28,10 @@
   (my-switch-to-default-mode)
   )
 
+(defun my-switch-to-default-mode-1-1-opt (&optional dummy1 dummy2)
+  (my-switch-to-default-mode)
+  )
+
 (defvar my-window-keymap (make-sparse-keymap))
 (define-key my-window-keymap (kbd "M-i") 'my-windmove-up)
 (define-key my-window-keymap (kbd "M-k") 'my-windmove-down)
@@ -128,6 +132,7 @@ by my- which switches to insert mode after execution"
 
 ;; Advice some functions
 (advice-add 'find-file :after 'my-switch-to-default-mode-1-opt)
+(advice-add 'quit-window :after 'my-switch-to-default-mode-1-1-opt)
 (advice-add 'xah-close-current-buffer :after 'my-switch-to-default-mode)
 ;; (advice-remove 'kill-buffer 'my-switch-to-default-mode-1-opt)
 
@@ -180,9 +185,16 @@ by my- which switches to insert mode after execution"
 (defvar my-scroll-keymap (make-sparse-keymap))
 (define-key my-scroll-keymap (kbd "i") 'scroll-down-command)
 (define-key my-scroll-keymap (kbd "k") 'scroll-up-command)
+(define-key my-scroll-keymap (kbd "<return>") 'my-exit-scroll-keymap)
+
+(defun my-exit-scroll-keymap ()
+  (interactive)
+  (out-of-scroll)
+  )
+
 (defun my-scroll-start ()
   (interactive)
-  (set-transient-map my-scroll-keymap t)
+  (fset 'out-of-scroll (set-transient-map my-scroll-keymap t))
   )
 
 (add-hook 'xah-fly-command-mode-activate-hook
