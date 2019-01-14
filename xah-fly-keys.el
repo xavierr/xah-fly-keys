@@ -3795,7 +3795,7 @@ Version 2017-01-21"
      ("z" . xah-goto-matching-bracket)))
     (define-key xah-fly-key-map (kbd "M-i") 'previous-line)
 
-    (define-key xah-fly-key-map (kbd "1") 'er/expand-region)
+    ;; (define-key xah-fly-key-map (kbd "1") 'er/expand-region)
     (define-key xah-fly-key-map (kbd "2") 'my-mc-start)
     (define-key xah-fly-key-map (kbd "F") 'isearch-backward)
     (define-key xah-fly-key-map (kbd "C") 'xav-append-copy-line-or-region)
