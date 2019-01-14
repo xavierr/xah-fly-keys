@@ -9,6 +9,7 @@
    ((eq major-mode 'python-mode) (xah-fly-command-mode-activate))
    ((eq major-mode 'emacs-lisp-mode) (xah-fly-command-mode-activate))
    ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'eshell-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'inferior-python-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'matlab-navigate-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'dired-mode) (xah-fly-insert-mode-activate))
@@ -259,6 +260,22 @@ by my- which switches to insert mode after execution"
 (add-hook 'dired-mode-hook 'setup-dired)
 (advice-add 'dired-find-file :after 'my-switch-to-default-mode)
 (advice-add 'dired-jump :after 'my-switch-to-default-mode)
+
+;; org settings
+(defun setup-org-mode ()
+  (interactive)
+  (define-key org-mode-map (kbd "M-i") 'org-shiftmetaup)
+  (define-key org-mode-map (kbd "M-k") 'org-shiftmetadown)
+  (define-key org-mode-map (kbd "M-j") 'org-shiftmetaleft)
+  (define-key org-mode-map (kbd "M-l") 'org-shiftmetaright)
+  (define-key org-mode-map (kbd "M-I") 'org-shiftmetaup)
+  (define-key org-mode-map (kbd "M-K") 'org-shiftmetadown)
+  (define-key org-mode-map (kbd "M-J") 'org-shiftmetaleft)
+  (define-key org-mode-map (kbd "M-L") 'org-shiftmetaright)
+  )
+(add-hook 'org-mode-hook #'setup-org-mode)
+
+
 
 ;; ibuffer settings
 (defun setup-ibuffer ()
