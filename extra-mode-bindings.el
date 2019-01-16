@@ -55,6 +55,7 @@
   (cond
    ((eq major-mode 'magit-mode) (define-key xah-fly-key-map "q" 'magit-bury-buffer))
    ((eq major-mode 'matlab-mode) (define-key xah-fly-key-map (kbd "æ") 'matlab-debug-keymap))
+   ((eq major-mode 'python-mode) (define-key xah-fly-key-map (kbd "æ") 'elpy-command-map))
    ((eq major-mode 'matlab-shell-mode) (define-key xah-fly-key-map (kbd "æ") 'matlab-shell-debug-keymap))
    (t nil)))
   
