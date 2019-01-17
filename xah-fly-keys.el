@@ -3524,6 +3524,7 @@ Version 2019-02-12"
 (define-key xah-fly-leader-key-map (kbd "M-k") 'delete-window-down)
 (define-key xah-fly-leader-key-map (kbd "M-j") 'delete-window-left)
 (define-key xah-fly-leader-key-map (kbd "M-l") 'delete-window-right)
+(define-key xah-fly-leader-key-map (kbd "+") 'balance-windows)
 
 
 
