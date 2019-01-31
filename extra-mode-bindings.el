@@ -1,6 +1,29 @@
 ;; Use ESC key to switch to command mode
 ;; (define-key key-translation-map (kbd "ESC") (kbd "<insert>"))
 
+;; set up buffer local variable for M-ijkl motion in insert mode
+(defvar-local use-M-ijkl-in-insert-mode t
+"use the M-i, M-j to move in insert mode"
+)
+
+(defun setup-M-ijkl-in-insert-mode ()
+  (interactive)
+  (if use-M-ijkl-in-insert-mode
+      (progn
+        (define-key xah-fly-key-map (kbd "M-i") 'previous-line)
+        (define-key xah-fly-key-map (kbd "M-k") 'next-line)
+        (define-key xah-fly-key-map (kbd "M-j") 'backward-char)
+        (define-key xah-fly-key-map (kbd "M-l") 'forward-char)
+        )
+    (define-key xah-fly-key-map (kbd "M-i") nil)
+    (define-key xah-fly-key-map (kbd "M-k") nil)
+    (define-key xah-fly-key-map (kbd "M-j") nil)
+    (define-key xah-fly-key-map (kbd "M-l") nil)
+    )
+  )
+
+(add-hook 'xah-fly-insert-mode-activate-hook 'setup-M-ijkl-in-insert-mode)
+
 ;; Switch by default to insert mode for some major modes
 (defun my-switch-to-default-mode ()
   (interactive)
@@ -265,6 +288,7 @@ by my- which switches to insert mode after execution"
 ;; org settings
 (defun setup-org-mode ()
   (interactive)
+  (setq use-M-ijkl-in-insert-mode nil)
   (define-key org-mode-map (kbd "M-i") 'org-metaup)
   (define-key org-mode-map (kbd "M-k") 'org-metadown)
   (define-key org-mode-map (kbd "M-j") 'org-metaleft)
