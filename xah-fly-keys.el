@@ -3847,7 +3847,6 @@ Version 2017-01-21"
      ("x" . counsel-M-x)
      ("y" . set-mark-command)
      ("z" . xah-goto-matching-bracket)))
-    (define-key xah-fly-key-map (kbd "M-i") 'previous-line)
 
     ;; (define-key xah-fly-key-map (kbd "1") 'er/expand-region)
     (define-key xah-fly-key-map (kbd "2") 'my-mc-start)
