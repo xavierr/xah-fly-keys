@@ -79,6 +79,7 @@
    ((eq major-mode 'magit-mode) (define-key xah-fly-key-map "q" 'magit-bury-buffer))
    ((eq major-mode 'matlab-mode) (define-key xah-fly-key-map (kbd "æ") 'matlab-debug-keymap))
    ((eq major-mode 'python-mode) (define-key xah-fly-key-map (kbd "æ") 'elpy-command-map))
+   ((eq major-mode 'dired-mode) (define-key xah-fly-key-map (kbd "æ") 'dired-command-map))
    ((eq major-mode 'matlab-shell-mode) (define-key xah-fly-key-map (kbd "æ") 'matlab-shell-debug-keymap))
    (t nil)))
   
@@ -274,16 +275,19 @@ by my- which switches to insert mode after execution"
 (add-hook 'pdf-view-mode-hook 'setup-pdf-view)
 
 ;; Dired settings
+(define-prefix-command 'dired-command-map)
 (defun setup-dired ()
   (interactive)
   (define-key dired-mode-map "i" 'previous-line)
   (define-key dired-mode-map "k" 'next-line)
+  (define-key dired-command-map "e" 'dired-toggle-read-only)
   (xah-fly-insert-mode-activate)
   )
 
 (add-hook 'dired-mode-hook 'setup-dired)
 (advice-add 'dired-find-file :after 'my-switch-to-default-mode)
 (advice-add 'dired-jump :after 'my-switch-to-default-mode)
+(advice-add 'wdired-finish-edit :after 'my-switch-to-default-mode)
 
 ;; org settings
 (defun setup-org-mode ()
