@@ -287,7 +287,7 @@ by my- which switches to insert mode after execution"
 
 (add-hook 'dired-mode-hook 'setup-dired)
 (advice-add 'dired-find-file :after 'my-switch-to-default-mode)
-(advice-add 'dired-jump :after 'my-switch-to-default-mode)
+(advice-add 'dired-jump :after 'my-switch-to-default-mode-1-1-opt)
 (advice-add 'wdired-finish-edit :after 'my-switch-to-default-mode)
 
 ;; org settings
