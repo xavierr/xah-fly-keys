@@ -246,6 +246,8 @@ Version 2015-10-01"
   (interactive)
   (re-search-forward (regexp-opt xah-right-brackets) nil t))
 
+(require 'dash)
+(defvar sexp-symbols '(?\" ?$ ?'))
 (defun xah-goto-matching-bracket ()
   "Move cursor to the matching bracket.
 If cursor is not on a bracket, call `backward-up-list'.
@@ -256,8 +258,8 @@ Version 2016-11-22"
   (if (nth 3 (syntax-ppss))
       (backward-up-list 1 'ESCAPE-STRINGS 'NO-SYNTAX-CROSSING)
     (cond
-     ((eq (char-after) ?\") (forward-sexp))
-     ((eq (char-before) ?\") (backward-sexp ))
+     ((--any? (eq (char-after) it) sexp-symbols) (forward-sexp))
+     ((--any? (eq (char-before) it) sexp-symbols) (backward-sexp))
      ((looking-at (regexp-opt xah-left-brackets))
       (forward-sexp))
      ((looking-back (regexp-opt xah-right-brackets) (max (- (point) 1) 1))
