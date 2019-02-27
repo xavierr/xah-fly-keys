@@ -2621,7 +2621,7 @@ Version 2015-04-09"
 URL `http://ergoemacs.org/emacs/modernization_isearch.html'
 Version 2015-04-09"
   (interactive)
-  (let ( $p1 $p2 $wi $wr)
+  (let ($p1 $p2 $wi $wr)
     (if (use-region-p)
         (progn
           (setq $p1 (region-beginning))
@@ -2636,6 +2636,7 @@ Version 2015-04-09"
     (when (< $p1 (point))
       (goto-char $p1))
     (setq $wi (buffer-substring-no-properties $p1 $p2))
+    (kill-new $wi)
     (setq $wr (read-from-minibuffer (concat "replace " $wi " with:")))
     (query-replace $wi $wr)
     ))
@@ -3203,7 +3204,7 @@ Version 2017-01-21"
    ("n" . xah-new-empty-buffer)
    ("o" . save-buffer)
    ("p" . xah-open-last-closed)
-   ("f" . xah-query-replace-current-word)
+   ("f" . xah-open-recently-closed)
    ("y" . xah-list-recently-closed)
    ("r" . find-file)
    ))
@@ -3212,6 +3213,7 @@ Version 2017-01-21"
 (define-key xah-fly-c-keymap (kbd "M-k") 'split-window-vertically)
 (define-key xah-fly-c-keymap (kbd "M-j") 'split-window-horizontally)
 (define-key xah-fly-c-keymap (kbd "M-l") 'split-window-horizontally)
+(define-key xah-fly-c-keymap (kbd "r") 'isearch-forward-regexp)
 
 (xah-fly--define-keys
  (define-prefix-command 'xah-fly-e-keymap)
@@ -3386,7 +3388,9 @@ Version 2017-01-21"
    ;; x
    ("y" . delete-duplicate-lines)
    ;; z
-))
+   ))
+
+(define-key xah-fly-t-keymap "y" 'xah-query-replace-current-word)
 
 (xah-fly--define-keys
  (define-prefix-command 'xah-fly-w-keymap)
