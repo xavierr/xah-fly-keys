@@ -282,6 +282,7 @@ by my- which switches to insert mode after execution"
   (define-key dired-mode-map "i" 'previous-line)
   (define-key dired-mode-map "k" 'next-line)
   (define-key dired-command-map "e" 'dired-toggle-read-only)
+  (define-key dired-mode-map "K" 'dired-do-kill-lines)
   (xah-fly-insert-mode-activate)
   )
 
