@@ -4044,22 +4044,19 @@ URL `http://ergoemacs.org/misc/ergoemacs_vi_mode.html'"
   (xah-fly-insert-mode-activate)
   (xah-fly-keys 0))
 
-(defun my-bindkey-xfk-command-mode ()
-  "Define keys for `xah-fly-command-mode-activate-hook'"
+
+(defun copy-to-other-window ()
   (interactive)
-
-  (cond
-
-   ;; if current mode is xah-html-mode, change some key
-   ((eq major-mode 'dired-mode)
-    (define-key xah-fly-key-map "b" 'dired-up-directory))
-    ;; more major-mode checking here
-    
-    ;; if nothing match, do nothing
-    (t nil)))
-
-(add-hook 'xah-fly-command-mode-activate-hook 'my-bindkey-xfk-command-mode)
-
+  (if (use-region-p)
+      (copy-region-as-kill (region-beginning) (region-end))
+    (copy-region-as-kill (line-beginning-position) (line-end-position))
+    (end-of-line)
+    (forward-char))
+  (with-selected-window (next-window)
+    (yank)
+    (insert "\n"))
+  )
+(define-key xah-fly-r-keymap "y" 'copy-to-other-window)
 (provide 'xah-fly-keys)
 
 ;;; xah-fly-keys.el ends here
