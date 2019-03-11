@@ -368,5 +368,30 @@ by my- which switches to insert mode after execution"
   (shell-command "xmodmap /home/xavier/.Xmodmap")
   )
 
+(defun select-whole-line ()
+  (interactive)
+  (beginning-of-line)
+  (push-mark-command nil)
+  (end-of-line)
+  (set-transient-map my-whole-line-select-map t)
+  )
+
+(defun move-down-one-line ()
+  (interactive)
+  (next-line)
+  (end-of-line)
+  )
+
+(defun move-up-one-line ()
+  (interactive)
+  (previous-line)
+  (beginning-of-line)
+  )
+
+(defvar my-whole-line-select-map (make-sparse-keymap))
+(define-key my-whole-line-select-map (kbd "i") 'move-up-one-line)
+(define-key my-whole-line-select-map (kbd "k") 'move-down-one-line)
+(define-key xah-fly-leader-key-map (kbd "t") 'select-whole-line)
+
 (provide 'extra-mode-bindings)
  
