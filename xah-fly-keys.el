@@ -3497,7 +3497,8 @@ Version 2019-02-12"
    ("9" . ispell-word)
    ;; 0
 
-   ("a" . mark-whole-buffer)
+   ;; ("a" . mark-whole-buffer)
+   ("a" . exchange-point-and-mark)
    ("b" . end-of-buffer)
    ("c" . xah-fly-c-keymap)
    ("d" . beginning-of-buffer)
@@ -3511,9 +3512,10 @@ Version 2019-02-12"
    ("l" . recenter-top-bottom)
    ("m" . dired-jump)
    ("n" . xah-fly-n-keymap)
-   ("o" . exchange-point-and-mark)
+   ;; ("o" . exchange-point-and-mark)
+   ("o" . save-buffer)
    ("p" . query-replace)
-   ("q" . xah-cut-all-or-region)
+   ;; ("q" . xah-cut-all-or-region)
    ("r" . xah-fly-r-keymap)
    ("s" . save-buffer)
    ("t" . xah-fly-t-keymap)
@@ -4109,7 +4111,7 @@ URL `http://ergoemacs.org/misc/ergoemacs_vi_mode.html'"
     (yank)
     (insert "\n"))
   )
-(define-key xah-fly-r-keymap "y" 'copy-to-other-window)
+(define-key xah-fly-r-keymap "v" 'copy-to-other-window)
 (provide 'xah-fly-keys)
 
 ;;; xah-fly-keys.el ends here
