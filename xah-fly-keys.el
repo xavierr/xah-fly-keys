@@ -3246,7 +3246,7 @@ Version 2019-02-12"
    ("i" . xah-copy-file-path)
    ("l" . bookmark-set)
    ("n" . xah-new-empty-buffer)
-   ("o" . save-buffer)
+   ;; ("o" . save-buffer)
    ("p" . xah-open-last-closed)
    ("f" . xah-open-recently-closed)
    ("y" . xah-list-recently-closed)
