@@ -123,6 +123,27 @@ by my- which switches to insert mode after execution"
   (xah-fly-insert-mode-activate)
   )
 
+;; Insert blank line above and below
+(defun my-insert-blank-line-below ()
+  "insert blank line below"
+  (interactive)
+  (end-of-line)
+  (open-line 1)
+  (forward-line 1)
+  (xah-fly-insert-mode-activate)
+  (indent-for-tab-command)
+  )
+
+(defun my-insert-blank-line-above ()
+  "insert blank line above"
+  (interactive)
+  (beginning-of-line)
+  (open-line 1)
+  (xah-fly-insert-mode-activate)
+  (indent-for-tab-command)
+  )
+
+
 (define-prefix-command 'vi-type-delete-and-insert-keymap)
 (define-key vi-type-delete-and-insert-keymap "r" #'my-xah-kill-word)
 (define-key vi-type-delete-and-insert-keymap "e" #'my-xah-backward-kill-word)
@@ -138,7 +159,8 @@ by my- which switches to insert mode after execution"
 (define-key vi-type-delete-and-insert-keymap "x" #'my-xah-cut-line-or-region)
 (define-key vi-type-delete-and-insert-keymap "v" #'my-yank)
 (define-key vi-type-delete-and-insert-keymap "z" #'my-end-of-buffer)
-(define-key vi-type-delete-and-insert-keymap "i" #'xah-fly-insert-mode-activate)
+(define-key vi-type-delete-and-insert-keymap "i" #'my-insert-blank-line-above)
+(define-key vi-type-delete-and-insert-keymap "k" #'my-insert-blank-line-below)
 
 (defun add-vi-delete-and-switch-to-insert-mode-bindings ()
   (interactive)
@@ -317,28 +339,7 @@ by my- which switches to insert mode after execution"
   )
 (add-hook 'ibuffer-hook #'setup-ibuffer)
 
-;; Insert blank line above and below
-(defun my-insert-blank-line-below ()
-  "insert blank line below"
-  (interactive)
-  (end-of-line)
-  (open-line 1)
-  (forward-line 1)
-  (xah-fly-insert-mode-activate)
-  (indent-for-tab-command)
-  )
 
-(defun my-insert-blank-line-above ()
-  "insert blank line above"
-  (interactive)
-  (beginning-of-line)
-  (open-line 1)
-  (xah-fly-insert-mode-activate)
-  (indent-for-tab-command)
-  )
-
-(define-key xah-fly-leader-key-map (kbd "h") 'my-insert-blank-line-above)
-(define-key xah-fly-leader-key-map (kbd "n") 'my-insert-blank-line-below)
 
 ;; Use which-key package
 (require 'which-key)
