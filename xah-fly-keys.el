@@ -3529,6 +3529,8 @@ Version 2019-02-12"
    ))
 
 (define-key xah-fly-leader-key-map (kbd "M-i") 'delete-window-up)
+(define-key xah-fly-leader-key-map (kbd "RET") 'newline)
+(define-key xah-fly-leader-key-map (kbd "<return>") 'newline)
 (define-key xah-fly-leader-key-map (kbd "M-k") 'delete-window-down)
 (define-key xah-fly-leader-key-map (kbd "M-j") 'delete-window-left)
 (define-key xah-fly-leader-key-map (kbd "M-l") 'delete-window-right)
@@ -3801,7 +3803,8 @@ Version 2017-01-21"
      (":" . nil)
 
      ("SPC" . xah-fly-leader-key-map)
-     ("DEL" . xah-fly-leader-key-map)
+     ("SPC" . xah-fly-leader-key-map)
+     ("RET" . xah-fly-insert-mode-activate)
      ("<" . beginning-of-buffer)
      
      ("'" . quit-window)
@@ -3858,6 +3861,7 @@ Version 2017-01-21"
 
     ;; (define-key xah-fly-key-map (kbd "1") 'er/expand-region)
     (define-key xah-fly-key-map (kbd "2") 'my-mc-start)
+    (define-key xah-fly-key-map (kbd "<return>") 'xah-fly-insert-mode-activate)
     (define-key xah-fly-key-map (kbd "F") 'isearch-backward)
     (define-key xah-fly-key-map (kbd "C") 'xav-append-copy-line-or-region)
     (define-key xah-fly-key-map (kbd "X") 'xav-append-cut-line-or-region)
@@ -3912,6 +3916,7 @@ Version 2018-05-07"
      ("SPC" . nil)
      ;; ("SPC" . xah-fly-space-key)
      ("DEL" . nil)
+     ("RET" . nil)
      ("<" . nil)
      ("'" . nil)
      ("," . nil)
@@ -3971,6 +3976,7 @@ Version 2018-05-07"
      ;;
      ))
   (define-key xah-fly-key-map (kbd "F") nil)
+  (define-key xah-fly-key-map (kbd "<return>") nil)
   (define-key xah-fly-key-map (kbd "C") nil)
   (define-key xah-fly-key-map (kbd "X") nil)
   (define-key xah-fly-key-map (kbd "M-i") nil)
