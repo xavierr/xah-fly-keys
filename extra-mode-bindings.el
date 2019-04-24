@@ -290,9 +290,10 @@ by my- which switches to insert mode after execution"
   (define-key pdf-view-mode-map "l" 'image-forward-hscroll)
   (define-key pdf-view-mode-map "a" 'pdf-annot-add-highlight-markup-annotation)
   (define-key pdf-view-mode-map "\C-f" 'pdf-links-isearch-link)
-  (define-key pdf-view-mode-map "f" 'isearch-forward)
+  (define-key pdf-view-mode-map "3" 'delete-other-windows)
   (require 'pdf-links)
   (define-key pdf-links-minor-mode-map "f" nil)
+  (define-key pdf-view-mode-map "f" 'isearch-forward)
   )
 
 (add-hook 'pdf-view-mode-hook 'setup-pdf-view)
