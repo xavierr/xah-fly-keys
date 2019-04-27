@@ -331,6 +331,13 @@ by my- which switches to insert mode after execution"
   )
 (add-hook 'org-mode-hook #'setup-org-mode)
 
+;; grep mode settings
+(defun setup-grep-mode ()
+  (interactive)
+  (define-key grep-mode-map (kbd "i") 'previous-error-no-select)
+  (define-key grep-mode-map (kbd "k") 'next-error-no-select))
+
+(add-hook 'grep-mode-hook #'setup-grep-mode)
 
 
 ;; ibuffer settings
