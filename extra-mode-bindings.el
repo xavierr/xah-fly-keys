@@ -54,6 +54,10 @@
   (my-switch-to-default-mode)
   )
 
+(defun my-switch-to-default-mode-1-1-opt (&optional dummy1 dummy2)
+  (my-switch-to-default-mode)
+  )
+
 (defvar my-window-keymap (make-sparse-keymap))
 (define-key my-window-keymap (kbd "M-i") 'my-windmove-up)
 (define-key my-window-keymap (kbd "M-k") 'my-windmove-down)
@@ -67,10 +71,6 @@
   )
 
 (add-hook 'my-windmove-hook #'my-window-switch-setup)
-(defun my-switch-to-default-mode-1-1-opt (&optional dummy1 dummy2)
-  (my-switch-to-default-mode)
-  )
-
 ;; (add-hook 'buffer-list-update-hook #'my-switch-to-default-mode)
 
 ;; Extra keybindings for specific major modes in command mode
