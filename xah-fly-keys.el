@@ -3194,6 +3194,7 @@ Version 2019-02-12"
    ("c" . bookmark-bmenu-list)
    ("e" . ibuffer)
    ("u" . switch-to-buffer-other-window)
+   ("g" . find-file-other-window)
    ("h" . recentf-open-files)
    ("i" . xah-copy-file-path)
    ("l" . bookmark-set)
