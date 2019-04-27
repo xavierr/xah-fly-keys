@@ -117,14 +117,14 @@
 
 ;; If you like this project, Buy Xah Emacs Tutorial http://ergoemacs.org/emacs/buy_xah_emacs_tutorial.html or make a donation. Thanks.
 
-
+
 ;;; Code:
 
 (require 'dired) ; in emacs
 (require 'dired-x) ; in emacs
 (require 'ido) ; in emacs
 
-
+
 
 (when (version<= emacs-version "26.0.50"  )
   (defalias 'global-display-line-numbers-mode 'linum-mode ))
@@ -136,7 +136,7 @@
 
 (defvar xah-fly-use-meta-key t "if nil, do not bind any meta key.")
 
-
+
 ;; cursor movement
 
 (defun xah-pop-local-mark-ring ()
@@ -401,7 +401,7 @@ Version 2015-03-24"
 ;;   (posix-search-backward "[ \t\n]+" nil t)
 ;;   )
 
-
+
 ;; editing commands
 
 (defun xah-copy-line-or-region ()
@@ -1623,7 +1623,7 @@ version 2016-07-17"
   (require 'rect)
   (kill-new (mapconcat 'identity (extract-rectangle @begin @end) "\n")))
 
-
+
 ;; insertion commands
 
 (defun xah-insert-date ()
@@ -1931,7 +1931,7 @@ Version 2015-11-06"
           (ido-completing-read "insert:" (mapcar (lambda (x) (concat (car x) (cdr x))) xah-unicode-list)))
     (insert (car (assoc (substring gotThis 0 1) xah-unicode-list)))))
 
-
+
 ;; text selection
 
 (defun xah-select-current-block ()
@@ -2109,7 +2109,7 @@ Version 2018-10-11"
     (skip-chars-forward $skipChars)
     (set-mark $p1)))
 
-
+
 ;; misc
 
 (defun xah-user-buffer-q ()
@@ -2339,7 +2339,7 @@ Version 2019-01-16"
             (when (y-or-n-p (format "file no exist: 「%s」. Create?" $path))
               (find-file $path ))))))))
 
-
+
 
 (defvar xah-run-current-file-before-hook nil "Hook for `xah-run-current-file'. Before the file is run.")
 
@@ -2617,7 +2617,7 @@ Version 2017-08-27"
     (when (eq major-mode 'dired-mode)
       (revert-buffer))))
 
-
+
 
 (defun xah-search-current-word ()
   "Call `isearch' on current word or text selection.
@@ -2776,7 +2776,7 @@ Version 2017-01-29"
   (interactive)
   (describe-function major-mode))
 
-
+
 ;; key maps for conversion
 
 (defvar xah--dvorak-to-azerty-kmap
@@ -3176,7 +3176,7 @@ Version 2019-02-12"
      (define-key @keymap-name (kbd (xah-fly--key-char (car $pair))) (cdr $pair)))
    @key-cmd-alist))
 
-
+
 ;; keymaps
 
 ;; (defvar xah-fly-swapped-1-8-and-2-7-p nil "If non-nil, it means keys 1 and 8 are swapped, and 2 and 7 are swapped. See: http://xahlee.info/kbd/best_number_key_layout.html")
@@ -3230,7 +3230,7 @@ Version 2019-02-12"
    ("0" . expand-jump-to-next-slot)
    ("=" . expand-jump-to-previous-slot)))
 
-
+
 
 (xah-fly--define-keys
  (define-prefix-command 'xah-fly-c-keymap)
@@ -3537,7 +3537,7 @@ Version 2019-02-12"
 (define-key xah-fly-leader-key-map (kbd "+") 'balance-windows)
 
 
-
+
 ;;;; misc
 
 ;; the following have keys in emacs, but right now i decided not to give them a key, because either they are rarely used (say, less than once a month by 90% of emacs users), or there is a more efficient command/workflow with key in xah-fly-keys
@@ -3569,7 +3569,7 @@ Version 2019-02-12"
 ;; C-x l	count-lines-page
 ;; C-x m	compose-mail
 
-
+
 ;; undecided yet
 
 ;; C-x e	kmacro-end-and-call-macro
@@ -3618,7 +3618,7 @@ Version 2019-02-12"
 ;; C-x C-k r	apply-macro-to-region-lines
 ;; C-x C-k s	kmacro-start-macro
 
-
+
 
 ;; C-x 4 C-f	find-file-other-window
 ;; C-x 4 C-o	display-buffer
@@ -3673,7 +3673,7 @@ Version 2019-02-12"
 ;;    ("v" . vc-next-action)
 ;;    ("~" . vc-revision-other-window)))
 
-
+
 ;; setting keys
 
 (progn
@@ -3767,7 +3767,7 @@ Version 2019-02-12"
     (when xah-fly-use-meta-key
       (define-key xah-fly-key-map (kbd "M-SPC") 'xah-fly-command-mode-activate-no-hook))))
 
-
+
 
 (defvar xah-fly-insert-state-q t "Boolean value. true means insertion mode is on.")
 (setq xah-fly-insert-state-q t)
@@ -4051,12 +4051,12 @@ Version 2017-07-07"
   (xah-fly-insert-mode-activate)
   (left-char))
 
-
+
 
 ;; ;; when in shell mode, switch to insertion mode.
 ;; (add-hook 'dired-mode-hook 'xah-fly-keys-off)
 
-
+
 
 ;; experimental. auto switch back to command mode after some sec of idle time
 ;; (setq xah-fly-timer-id (run-with-idle-timer 20 t 'xah-fly-command-mode-activate))
