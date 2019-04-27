@@ -32,6 +32,7 @@
    ((eq major-mode 'python-mode) (xah-fly-command-mode-activate))
    ((eq major-mode 'emacs-lisp-mode) (xah-fly-command-mode-activate))
    ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'grep-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'eshell-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'inferior-python-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'matlab-navigate-mode) (xah-fly-insert-mode-activate))
