@@ -132,7 +132,8 @@
 (defvar xah-fly-command-mode-activate-hook nil "Hook for `xah-fly-command-mode-activate'")
 (defvar xah-fly-insert-mode-activate-hook nil "Hook for `xah-fly-insert-mode-activate'")
 
-(defvar xah-fly-use-control-key t "if nil, do not bind any control key. When t, standard keys for open, close, paste, are bound.")
+(defvar xah-fly-use-control-key nil "if nil, do not bind any control key. When t, standard keys for open, close, paste, are bound.")
+
 (defvar xah-fly-use-meta-key t "if nil, do not bind any meta key.")
 
 
@@ -3192,7 +3193,7 @@ Version 2019-02-12"
    ("." . find-file)
    ("c" . bookmark-bmenu-list)
    ("e" . ibuffer)
-   ("u" . xah-open-file-at-cursor)
+   ("u" . switch-to-buffer-other-window)
    ("h" . recentf-open-files)
    ("i" . xah-copy-file-path)
    ("l" . bookmark-set)
@@ -3377,6 +3378,8 @@ Version 2019-02-12"
    ;; z
 ))
 
+(define-key xah-fly-t-keymap  (kbd "f") 'switch-to-buffer-other-window)
+
 (xah-fly--define-keys
  (define-prefix-command 'xah-fly-w-keymap)
  '(
@@ -3468,6 +3471,13 @@ Version 2019-02-12"
    ;; z
    ;;
    ))
+
+(define-key xah-fly-leader-key-map (kbd "ø") 'save-buffer) 
+(define-key xah-fly-leader-key-map (kbd "M-i") 'delete-window-up)
+(define-key xah-fly-leader-key-map (kbd "M-k") 'delete-window-down)
+(define-key xah-fly-leader-key-map (kbd "M-j") 'delete-window-left)
+(define-key xah-fly-leader-key-map (kbd "M-l") 'delete-window-right)
+
 
 
 ;;;; misc
@@ -3788,6 +3798,21 @@ Version 2017-01-21"
      ("x" . xah-toggle-letter-case)
      ("y" . set-mark-command)
      ("z" . xah-goto-matching-bracket)))
+    (define-key xah-fly-key-map (kbd "M-i") 'previous-line)
+
+    (define-key xah-fly-key-map (kbd "M-k") 'next-line)
+    (define-key xah-fly-key-map (kbd "2") 'my-mc-start)
+    (define-key xah-fly-key-map (kbd "s") 'delete-backward-char)
+    (define-key xah-fly-key-map (kbd "d") 'delete-char)
+    (define-key xah-fly-key-map (kbd "ø") 'xah-end-of-line-or-block)
+    (define-key xah-fly-key-map (kbd "M-i") 'my-windmove-up)
+    (define-key xah-fly-key-map (kbd "M-k") 'my-windmove-down)
+    (define-key xah-fly-key-map (kbd "M-j") 'my-windmove-left)
+    (define-key xah-fly-key-map (kbd "M-l") 'my-windmove-right)
+    (define-key xah-fly-key-map (kbd "M-I") 'split-window-vertically)
+    (define-key xah-fly-key-map (kbd "M-K") 'split-window-vertically)
+    (define-key xah-fly-key-map (kbd "M-J") 'split-window-horizontally)
+    (define-key xah-fly-key-map (kbd "M-L") 'split-window-horizontally)
 
   (define-key xah-fly-key-map (kbd (xah-fly--key-char "a"))
     (if (fboundp 'smex) 'smex (if (fboundp 'helm-M-x) 'helm-M-x 'execute-extended-command)))
@@ -3890,7 +3915,17 @@ Version 2018-05-07"
 
      ;;
      ))
-
+  (define-key xah-fly-key-map (kbd "M-i") nil)
+  (define-key xah-fly-key-map (kbd "M-k") nil)
+  (define-key xah-fly-key-map (kbd "ø") nil)
+  (define-key xah-fly-key-map (kbd "M-i") nil)
+  (define-key xah-fly-key-map (kbd "M-k") nil)
+  (define-key xah-fly-key-map (kbd "M-j") nil)
+  (define-key xah-fly-key-map (kbd "M-l") nil)
+  (define-key xah-fly-key-map (kbd "M-I") nil)
+  (define-key xah-fly-key-map (kbd "M-K") nil)
+  (define-key xah-fly-key-map (kbd "M-J") nil)
+  (define-key xah-fly-key-map (kbd "M-L") nil)
   (progn
     (setq xah-fly-insert-state-q t )
     (modify-all-frames-parameters (list (cons 'cursor-type 'bar))))
@@ -3991,6 +4026,22 @@ URL `http://ergoemacs.org/misc/ergoemacs_vi_mode.html'"
     (remove-hook 'shell-mode-hook 'xah-fly-insert-mode-activate))
   (xah-fly-insert-mode-activate)
   (xah-fly-keys 0))
+
+(defun my-bindkey-xfk-command-mode ()
+  "Define keys for `xah-fly-command-mode-activate-hook'"
+  (interactive)
+
+  (cond
+
+   ;; if current mode is xah-html-mode, change some key
+   ((eq major-mode 'dired-mode)
+    (define-key xah-fly-key-map "b" 'dired-up-directory))
+    ;; more major-mode checking here
+    
+    ;; if nothing match, do nothing
+    (t nil)))
+
+(add-hook 'xah-fly-command-mode-activate-hook 'my-bindkey-xfk-command-mode)
 
 (provide 'xah-fly-keys)
 
