@@ -3534,17 +3534,20 @@ Version 2019-02-12"
 (define-key xah-fly-leader-key-map (kbd "M-l") 'delete-window-right)
 (define-key xah-fly-leader-key-map (kbd "+") 'balance-windows)
 
-(defvar my-newline-keymap (make-sparse-keymap))
-(define-key my-newline-keymap (kbd "RET") #'newline)
-(define-key my-newline-keymap (kbd "<return>") #'newline)
-(defun my-newline-start ()
-  (interactive)
-  (newline)
-  (set-transient-map my-newline-keymap t)
-  )
-(define-key xah-fly-leader-key-map (kbd "RET") 'my-newline-start)
-(define-key xah-fly-leader-key-map (kbd "<return>") 'my-newline-start)
+;; setting for newline - not optimal ...
+;; (defvar my-newline-keymap (make-sparse-keymap))
+;; (define-key my-newline-keymap (kbd "RET") #'newline)
+;; (define-key my-newline-keymap (kbd "<return>") #'newline)
+;; (defun my-newline-start ()
+;;   (interactive)
+;;   (newline)
+;;   (set-transient-map my-newline-keymap t)
+;;   )
+;; (define-key xah-fly-leader-key-map (kbd "RET") 'my-newline-start)
+;; (define-key xah-fly-leader-key-map (kbd "<return>") 'my-newline-start)
 
+(define-key xah-fly-leader-key-map (kbd "RET") 'newline)
+(define-key xah-fly-leader-key-map (kbd "<return>") 'newline)
 
 ;;;; misc
 
