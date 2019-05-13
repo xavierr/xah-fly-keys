@@ -2637,8 +2637,7 @@ Version 2015-04-09"
     (setq mark-active nil)
     (when (< $p1 (point))
       (goto-char $p1))
-    (isearch-mode t)
-    (isearch-yank-string (buffer-substring-no-properties $p1 $p2))))
+    (swiper-isearch (buffer-substring-no-properties $p1 $p2))))
 
 (defun xah-query-replace-current-word ()
   "Call `isearch' on current word or text selection.
@@ -3504,7 +3503,7 @@ Version 2019-02-12"
    ("d" . beginning-of-buffer)
    ("e" . xah-fly-e-keymap)
    ("f" . xah-search-current-word)
-   ("g" . isearch-forward)
+   ("g" . swiper-isearch)
    ("h" . xah-fly-h-keymap)
    ("i" . kill-line)
    ("j" . xah-copy-all-or-region)
@@ -3863,7 +3862,7 @@ Version 2017-01-21"
      ("r" . forward-word)
      ("s" . xah-end-of-line-or-block)
      ("t" . next-line)
-     ("u" . isearch-forward)
+     ("u" . swiper-isearch)
      ("v" . xah-forward-right-bracket)
      ("w" . xah-goto-matching-bracket)
      ("x" . counsel-M-x)
