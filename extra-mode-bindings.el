@@ -305,7 +305,7 @@ by my- which switches to insert mode after execution"
 (defun setup-dired ()
   (interactive)
   (define-key dired-mode-map "i" 'previous-line)
-  (define-key dired-mode-map "f" 'isearch-forward)
+  (define-key dired-mode-map "f" 'swiper-isearch)
   (define-key dired-mode-map "k" 'next-line)
   (define-key dired-command-map "e" 'dired-toggle-read-only)
   (define-key dired-mode-map "K" 'dired-do-kill-lines)
