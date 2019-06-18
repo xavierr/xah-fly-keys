@@ -304,6 +304,7 @@ by my- which switches to insert mode after execution"
 (define-prefix-command 'dired-command-map)
 (defun setup-dired ()
   (interactive)
+  (define-key dired-mode-map "3" 'delete-other-windows)
   (define-key dired-mode-map "i" 'previous-line)
   (define-key dired-mode-map "f" 'swiper-isearch)
   (define-key dired-mode-map "k" 'next-line)

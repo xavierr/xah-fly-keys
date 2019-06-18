@@ -1522,6 +1522,11 @@ Version 2018-06-18"
          (message "File path copied: %s" $fpath)
          $fpath )))))
 
+(defun xah-copy-dir-path ()
+  (interactive)
+  (xah-copy-file-path t)
+  )
+
 ;; (defun xah-delete-text-block ()
 ;;   "Delete current/next text block or selection, and also copy to `kill-ring'.
 
@@ -3243,6 +3248,7 @@ Version 2019-02-12"
    ("g" . find-file-other-window)
    ("h" . recentf-open-files)
    ("i" . xah-copy-file-path)
+   ("d" . xah-copy-dir-path)
    ("l" . bookmark-set)
    ("n" . xah-new-empty-buffer)
    ;; ("o" . save-buffer)
