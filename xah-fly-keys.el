@@ -3878,7 +3878,7 @@ Version 2017-01-21"
     ;; (define-key xah-fly-key-map (kbd "1") 'er/expand-region)
     (define-key xah-fly-key-map (kbd "2") 'my-mc-start)
     (define-key xah-fly-key-map (kbd "<return>") 'xah-fly-insert-mode-activate)
-    (define-key xah-fly-key-map (kbd "F") 'isearch-backward)
+    (define-key xah-fly-key-map (kbd "F") 'swiper-isearch-backward)
     (define-key xah-fly-key-map (kbd "C") 'xav-append-copy-line-or-region)
     (define-key xah-fly-key-map (kbd "X") 'xav-append-cut-line-or-region)
     (define-key xah-fly-key-map (kbd "d") 'delete-char)
