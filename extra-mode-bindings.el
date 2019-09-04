@@ -318,6 +318,8 @@ by my- which switches to insert mode after execution"
 (advice-add 'dired-jump :after 'my-switch-to-default-mode-1-1-opt)
 (advice-add 'wdired-finish-edit :after 'my-switch-to-default-mode)
 
+(add-hook 'ibuffer-mode-hook (lambda () (define-key ibuffer-mode-map "f" 'swiper-isearch)))
+
 ;; org settings
 (defun setup-org-mode ()
   (interactive)
