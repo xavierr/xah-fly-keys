@@ -3416,7 +3416,7 @@ Version 2019-02-12"
    ("f" . goto-line )
    ;; g
    ("h" . xah-close-current-buffer )
-   ("i" . delete-non-matching-lines)
+   ("i" . org-recoll-search)
    ("j" . copy-to-register)
    ("k" . insert-register)
    ("l" . xah-escape-quotes)
