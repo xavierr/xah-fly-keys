@@ -42,7 +42,7 @@
    ((eq major-mode 'magit-status-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'magit-popup-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'pdf-view-mode) (xah-fly-insert-mode-activate))
-   ((eq major-mode 'ediff-mode) (xah-fly-insert-mode-activate))
+   ;; ((eq major-mode 'ediff-mode) (xah-fly-insert-mode-activate))
    (t nil))
   )
 
