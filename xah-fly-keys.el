@@ -3428,7 +3428,7 @@ Version 2019-02-12"
    ("r" . copy-rectangle-to-register)
    ;; s
    ("t" . repeat)
-   ("u" . delete-matching-lines)
+   ("u" . counsel-rg)
    ;; v
    ("w" . xah-next-window-or-frame)
    ;; x

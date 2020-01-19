@@ -34,6 +34,7 @@
    ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'grep-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'ivy-occur-grep-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'ripgrep-search-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'eshell-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'inferior-python-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'matlab-navigate-mode) (xah-fly-insert-mode-activate))
@@ -322,7 +323,7 @@ by my- which switches to insert mode after execution"
 
 (add-hook 'dired-mode-hook 'setup-dired)
 (advice-add 'dired-find-file :after 'my-switch-to-default-mode)
-(advice-add 'dired-jump :after 'my-switch-to-default-mode-1-opt-2)
+(advice-add 'dired-jump :after 'my-switch-to-default-mode-opt-2)
 (advice-add 'wdired-finish-edit :after 'my-switch-to-default-mode)
 
 (add-hook 'ibuffer-mode-hook (lambda () (define-key ibuffer-mode-map "f" 'swiper-isearch)))
@@ -357,6 +358,12 @@ by my- which switches to insert mode after execution"
 
 (add-hook 'ivy-occur-grep-mode-hook #'setup-ivy-occur-grep-mode)
 
+(defun setup-ripgrep-search-mode ()
+  (interactive)
+  (define-key ripgrep-search-mode-map (kbd "i") 'previous-error-no-select)
+  (define-key ripgrep-search-mode-map (kbd "k") 'next-error-no-select))
+
+(add-hook 'ripgrep-search-mode-hook #'setup-ripgrep-search-mode)
 
 
 ;; ibuffer settings
