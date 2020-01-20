@@ -33,6 +33,8 @@
    ((eq major-mode 'emacs-lisp-mode) (xah-fly-command-mode-activate))
    ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'grep-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'ivy-occur-grep-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'ripgrep-search-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'eshell-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'inferior-python-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'matlab-navigate-mode) (xah-fly-insert-mode-activate))
@@ -50,11 +52,15 @@
   (my-switch-to-default-mode)
   )
 
-(defun my-switch-to-default-mode-1-opt (dummy1 &optional dummy2)
+(defun my-switch-to-default-mode-1-opt-1 (dummy1 &optional dummy2)
   (my-switch-to-default-mode)
   )
 
-(defun my-switch-to-default-mode-1-1-opt (&optional dummy1 dummy2)
+(defun my-switch-to-default-mode-opt-2 (&optional dummy1 dummy2)
+  (my-switch-to-default-mode)
+  )
+
+(defun my-switch-to-default-mode-opt-1 (&optional dummy)
   (my-switch-to-default-mode)
   )
 
@@ -182,8 +188,8 @@ by my- which switches to insert mode after execution"
   )
 
 ;; Advice some functions
-(advice-add 'find-file :after 'my-switch-to-default-mode-1-opt)
-(advice-add 'quit-window :after 'my-switch-to-default-mode-1-1-opt)
+(advice-add 'find-file :after 'my-switch-to-default-mode-1-opt-1)
+(advice-add 'quit-window :after 'my-switch-to-default-mode-opt-2)
 (advice-add 'xah-close-current-buffer :after 'my-switch-to-default-mode)
 ;; (advice-remove 'kill-buffer 'my-switch-to-default-mode-1-opt)
 
@@ -221,6 +227,7 @@ by my- which switches to insert mode after execution"
 (advice-add 'ivy--switch-buffer-other-window-action :after 'my-switch-to-default-mode-1)
 (advice-add 'ivy--kill-buffer-action :after 'my-switch-to-default-mode-1)
 (advice-add 'swiper--action :after 'my-switch-to-default-mode-1)
+(advice-add 'next-error-no-select :after 'my-switch-to-default-mode-opt-1)
 
 ;; Multiple cursor settings
 (defvar my-mc-keymap (make-sparse-keymap))
@@ -316,7 +323,7 @@ by my- which switches to insert mode after execution"
 
 (add-hook 'dired-mode-hook 'setup-dired)
 (advice-add 'dired-find-file :after 'my-switch-to-default-mode)
-(advice-add 'dired-jump :after 'my-switch-to-default-mode-1-1-opt)
+(advice-add 'dired-jump :after 'my-switch-to-default-mode-opt-2)
 (advice-add 'wdired-finish-edit :after 'my-switch-to-default-mode)
 
 (add-hook 'ibuffer-mode-hook (lambda () (define-key ibuffer-mode-map "f" 'swiper-isearch)))
@@ -343,6 +350,20 @@ by my- which switches to insert mode after execution"
   (define-key grep-mode-map (kbd "k") 'next-error-no-select))
 
 (add-hook 'grep-mode-hook #'setup-grep-mode)
+
+(defun setup-ivy-occur-grep-mode ()
+  (interactive)
+  (define-key ivy-occur-grep-mode-map (kbd "i") 'previous-error-no-select)
+  (define-key ivy-occur-grep-mode-map (kbd "k") 'next-error-no-select))
+
+(add-hook 'ivy-occur-grep-mode-hook #'setup-ivy-occur-grep-mode)
+
+(defun setup-ripgrep-search-mode ()
+  (interactive)
+  (define-key ripgrep-search-mode-map (kbd "i") 'previous-error-no-select)
+  (define-key ripgrep-search-mode-map (kbd "k") 'next-error-no-select))
+
+(add-hook 'ripgrep-search-mode-hook #'setup-ripgrep-search-mode)
 
 
 ;; ibuffer settings
