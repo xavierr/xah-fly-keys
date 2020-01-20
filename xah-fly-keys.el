@@ -3842,7 +3842,7 @@ Version 2017-01-21"
      ("2" . xah-select-line)
      ("3" . delete-other-windows)
      ("4" . split-window-below)
-     ("5" . delete-char)
+     ("5" . split-window-right)
      ("6" . xah-select-block)
      ("7" . xah-select-line)
      ("8" . xah-extend-selection)
