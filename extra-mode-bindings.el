@@ -215,7 +215,9 @@ by my- which switches to insert mode after execution"
 (defun my-setup-magit ()
   (xah-fly-insert-mode-activate)
   (define-key magit-file-section-map "a" nil)
-  (define-key magit-hunk-section-map "a" nil)
+  (define-key magit-mode-map "k" 'next-line)
+  (define-key magit-mode-map "i" 'previous-line)
+  (define-key magit-mode-map "," 'magit-delete-thing)
   )
 (add-hook 'magit-mode-hook #'my-setup-magit)
 
