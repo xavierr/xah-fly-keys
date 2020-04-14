@@ -6,6 +6,14 @@
 "use the M-i, M-j to move in insert mode"
 )
 
+(defun xah-keys-have-priority ()
+  "Try to ensure that xah keybindings retain priority over other minor modes"
+  (interactive)
+  (unless (eq (caar minor-mode-map-alist) 'xah-fly-keys)
+    (let ((mykeys (assq 'xah-fly-keys minor-mode-map-alist)))
+      (assq-delete-all 'xah-fly-keys minor-mode-map-alist)
+      (add-to-list 'minor-mode-map-alist mykeys))))
+
 (defun setup-M-ijkl-in-insert-mode ()
   (interactive)
   (if use-M-ijkl-in-insert-mode
@@ -240,6 +248,7 @@ by my- which switches to insert mode after execution"
   (set-transient-map my-mc-keymap t)
   )
 (add-hook 'multiple-cursors-mode-disabled-hook #'xah-fly-command-mode-activate)
+(add-hook 'multiple-cursors-mode-enabled-hook #'xah-keys-have-priority)
 
 ;; Scroll up/down settings
 (defvar my-scroll-keymap (make-sparse-keymap))
