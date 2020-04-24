@@ -411,10 +411,6 @@ by my- which switches to insert mode after execution"
         @charstr
         ))))
 
-(defun reset-escape-key ()
-  (interactive)
-  (shell-command "xmodmap /home/xavier/.Xmodmap")
-  )
 
 (defun select-whole-line ()
   (interactive)
