@@ -38,6 +38,7 @@
   (cond
    ((eq major-mode 'matlab-mode) (xah-fly-command-mode-activate))
    ((eq major-mode 'python-mode) (xah-fly-command-mode-activate))
+   ((eq major-mode 'org-mode) (xah-fly-command-mode-activate))
    ((eq major-mode 'emacs-lisp-mode) (xah-fly-command-mode-activate))
    ((eq major-mode 'matlab-shell-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'grep-mode) (xah-fly-insert-mode-activate))
@@ -94,6 +95,7 @@
   (cond
    ((eq major-mode 'magit-mode) (define-key xah-fly-key-map "q" 'magit-bury-buffer))
    ((eq major-mode 'matlab-mode) (define-key xah-fly-key-map (kbd "æ") 'matlab-debug-keymap))
+   ((eq major-mode 'org-mode) (define-key xah-fly-key-map (kbd "æ") 'org-extra-keymap))
    ((eq major-mode 'python-mode) (define-key xah-fly-key-map (kbd "æ") 'elpy-command-map))
    ((eq major-mode 'dired-mode) (define-key xah-fly-key-map (kbd "æ") 'dired-command-map))
    ((eq major-mode 'latex-mode) (define-key xah-fly-key-map (kbd "æ") 'latex-extra-keymap))
