@@ -3428,6 +3428,7 @@ Version 2019-02-12"
    ("r" . copy-rectangle-to-register)
    ;; s
    ("t" . repeat)
+   ("e" . counsel-fzf)
    ("u" . counsel-rg)
    ;; v
    ("w" . xah-next-window-or-frame)
@@ -3696,7 +3697,7 @@ Version 2019-02-12"
   ;; set control meta, etc keys
 
   (progn
-    (define-key xah-fly-key-map (kbd "<insert>") 'xah-fly-command-mode-activate)
+    (define-key xah-fly-key-map [escape] 'xah-fly-command-mode-activate)
     (define-key xah-fly-key-map (kbd "<insertchar>") 'xah-fly-command-mode-activate)
     (define-key xah-fly-key-map (kbd "<f1>") 'xah-fly-command-mode-activate)
     (define-key xah-fly-key-map (kbd "<menu>") 'xah-fly-command-mode-activate)
