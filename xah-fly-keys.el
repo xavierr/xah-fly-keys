@@ -3412,7 +3412,7 @@ Version 2019-02-12"
    ;; b
    ("c" . goto-char)
    ("d" . mark-defun)
-   ("e" . list-matching-lines)
+   ("e" . counsel-fzf)
    ("f" . goto-line )
    ;; g
    ("h" . xah-close-current-buffer )
@@ -3428,7 +3428,6 @@ Version 2019-02-12"
    ("r" . copy-rectangle-to-register)
    ;; s
    ("t" . repeat)
-   ("e" . counsel-fzf)
    ("u" . counsel-rg)
    ;; v
    ("w" . xah-next-window-or-frame)
