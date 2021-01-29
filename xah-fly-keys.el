@@ -3423,7 +3423,7 @@ Version 2019-02-12"
    ("m" . xah-make-backup-and-save)
    ("n" . repeat-complex-command)
    ;; o
-   ("p" . query-replace-regexp)
+   ("p" . vr/query-replace)
    ;; q
    ("r" . copy-rectangle-to-register)
    ;; s
