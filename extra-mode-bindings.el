@@ -96,6 +96,7 @@
    ((eq major-mode 'magit-mode) (define-key xah-fly-key-map "q" 'magit-bury-buffer))
    ((eq major-mode 'matlab-mode) (define-key xah-fly-key-map (kbd "æ") 'matlab-debug-keymap))
    ((eq major-mode 'org-mode) (define-key xah-fly-key-map (kbd "æ") 'org-extra-keymap))
+   ((eq major-mode 'org-link-mode) (define-key xah-fly-key-map (kbd "æ") 'org-extra-keymap))
    ((eq major-mode 'python-mode) (define-key xah-fly-key-map (kbd "æ") 'elpy-command-map))
    ((eq major-mode 'dired-mode) (define-key xah-fly-key-map (kbd "æ") 'dired-command-map))
    ((eq major-mode 'latex-mode) (define-key xah-fly-key-map (kbd "æ") 'latex-extra-keymap))
@@ -232,14 +233,17 @@ by my- which switches to insert mode after execution"
 (add-hook 'magit-mode-hook #'my-setup-magit)
 
 ;; Ivy settings
-(define-key ivy-minibuffer-map (kbd "M-i") 'previous-line)
-(define-key ivy-minibuffer-map (kbd "M-k") 'next-line)
-(define-key ivy-minibuffer-map (kbd "M-I") 'ivy-insert-current)
-(advice-add 'ivy--switch-buffer-action :after 'my-switch-to-default-mode-1)
-(advice-add 'ivy--switch-buffer-other-window-action :after 'my-switch-to-default-mode-1)
-(advice-add 'ivy--kill-buffer-action :after 'my-switch-to-default-mode-1)
-(advice-add 'swiper--action :after 'my-switch-to-default-mode-1)
-(advice-add 'next-error-no-select :after 'my-switch-to-default-mode-opt-1)
+(with-eval-after-load 'ivy-init
+  (define-key ivy-minibuffer-map (kbd "M-i") 'previous-line)
+  (define-key ivy-minibuffer-map (kbd "M-k") 'next-line)
+  (define-key ivy-minibuffer-map (kbd "M-I") 'ivy-insert-current)
+  (advice-add 'ivy--switch-buffer-action :after 'my-switch-to-default-mode-1)
+  (advice-add 'ivy--switch-buffer-other-window-action :after 'my-switch-to-default-mode-1)
+  (advice-add 'ivy--kill-buffer-action :after 'my-switch-to-default-mode-1)
+  (advice-add 'swiper--action :after 'my-switch-to-default-mode-1)
+  (advice-add 'next-error-no-select :after 'my-switch-to-default-mode-opt-1)
+  (add-hook 'ivy-occur-grep-mode-hook #'setup-ivy-occur-grep-mode)
+  )
 
 ;; Multiple cursor settings
 (defvar my-mc-keymap (make-sparse-keymap))
