@@ -16,7 +16,7 @@
 
 (defun setup-M-ijkl-in-insert-mode ()
   (interactive)
-  (if use-M-ijkl-in-insert-mode
+  (if (and use-M-ijkl-in-insert-mode (not (eq major-mode 'vterm-mode)))
       (progn
         (define-key xah-fly-key-map (kbd "M-i") 'previous-line)
         (define-key xah-fly-key-map (kbd "M-k") 'next-line)
@@ -53,6 +53,7 @@
    ((eq major-mode 'magit-status-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'magit-popup-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'pdf-view-mode) (xah-fly-insert-mode-activate))
+   ((eq major-mode 'vterm-mode) (xah-fly-command-mode-activate))
    ;; ((eq major-mode 'ediff-mode) (xah-fly-insert-mode-activate))
    (t nil))
   )
@@ -101,6 +102,7 @@
    ((eq major-mode 'dired-mode) (define-key xah-fly-key-map (kbd "æ") 'dired-command-map))
    ((eq major-mode 'latex-mode) (define-key xah-fly-key-map (kbd "æ") 'latex-extra-keymap))
    ((eq major-mode 'matlab-shell-mode) (define-key xah-fly-key-map (kbd "æ") 'matlab-shell-debug-keymap))
+   ((eq major-mode 'vterm-mode) (xavier/vterm-setup-xah-command-mode))
    (t nil)))
   
 (add-hook 'xah-fly-command-mode-activate-hook 'my-bindkey-xfk-command-mode)
