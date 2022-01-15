@@ -3490,7 +3490,8 @@ Version 2019-02-12"
    ;; [
    ("\\" . toggle-input-method)
    ;; `
-
+   
+   ("0" . open-bookmark-file)
    ;; 1
    ;; 2
    ("3" . delete-window)
