@@ -3820,7 +3820,6 @@ Version 2017-01-21"
      (":" . nil)
 
      ("SPC" . xah-fly-leader-key-map)
-     ("SPC" . xah-fly-leader-key-map)
      ("RET" . xah-fly-insert-mode-activate)
      ("<" . beginning-of-buffer)
      
