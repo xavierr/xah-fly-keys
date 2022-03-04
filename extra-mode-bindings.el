@@ -96,6 +96,7 @@
   (cond
    ((eq major-mode 'magit-mode) (define-key xah-fly-key-map "q" 'magit-bury-buffer))
    ((eq major-mode 'matlab-mode) (define-key xah-fly-key-map (kbd "æ") 'matlab-debug-keymap))
+   ((eq major-mode 'python-mode) (define-key xah-fly-key-map (kbd "æ") 'python-debug-keymap))
    ((eq major-mode 'julia-mode) (define-key xah-fly-key-map (kbd "æ") 'julia-debug-keymap))
    ((eq major-mode 'org-mode) (define-key xah-fly-key-map (kbd "æ") 'org-extra-keymap))
    ((eq major-mode 'org-link-mode) (define-key xah-fly-key-map (kbd "æ") 'org-extra-keymap))

@@ -3249,6 +3249,7 @@ Version 2019-02-12"
    ("h" . recentf-open-files)
    ("i" . xah-copy-file-path)
    ("d" . xah-copy-dir-path)
+   ("m" . xavier-copy-filename)
    ("l" . bookmark-set)
    ("n" . xah-new-empty-buffer)
    ;; ("o" . save-buffer)
