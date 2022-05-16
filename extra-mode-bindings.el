@@ -289,25 +289,6 @@ by my- which switches to insert mode after execution"
           (lambda () (define-key xah-fly-key-map "n" nil))
           )
 
-;; Scroll delete/space setting
-(defvar my-delete-and-space-keymap (make-sparse-keymap))
-(defun my-insert-space ()
-  (interactive)
-  (insert " ")
-  )
-(define-key my-delete-and-space-keymap (kbd "SPC") #'my-insert-space)
-(defun my-delete-and-space-start ()
-  (interactive)
-  (set-transient-map my-delete-and-space-keymap t)
-  )
-
-(add-hook 'xah-fly-command-mode-activate-hook
-          (lambda () (define-key xah-fly-key-map "å" 'my-delete-and-space-start))
-          )
-(add-hook 'xah-fly-insert-mode-activate-hook
-          (lambda () (define-key xah-fly-key-map "å" nil))
-          )
-
 ;; extra setting for backward search
 (define-key isearch-mode-map  (kbd "<home>") 'isearch-repeat-backward)
 (define-key isearch-mode-map  (kbd "<tab>") 'isearch-repeat-forward)
