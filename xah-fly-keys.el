@@ -3380,7 +3380,7 @@ Version 2019-02-12"
    ("4" . increment-register)
    ("c" . replace-rectangle)
    ("d" . delete-rectangle)
-   ("e" . call-last-kbd-macro)
+   ("e" . xavier/call-last-kbd-macro)
    ("g" . kill-rectangle)
    ("l" . clear-rectangle)
    ("i" . xah-space-to-newline)
