@@ -54,6 +54,7 @@
    ((eq major-mode 'magit-popup-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'pdf-view-mode) (xah-fly-insert-mode-activate))
    ((eq major-mode 'vterm-mode) (xah-fly-command-mode-activate))
+   ((eq major-mode 'org-agenda-mode) (xah-fly-insert-mode-activate))
    ;; ((eq major-mode 'ediff-mode) (xah-fly-insert-mode-activate))
    (t nil))
   )
@@ -351,6 +352,16 @@ by my- which switches to insert mode after execution"
 (advice-add 'wdired-finish-edit :after 'my-switch-to-default-mode)
 
 (add-hook 'ibuffer-mode-hook (lambda () (define-key ibuffer-mode-map "f" 'swiper-isearch)))
+
+;; agenda setting
+(defun setup-agenda-mode ()
+  (interactive)
+  (define-key org-agenda-mode-map "i" 'previous-line)
+  (define-key org-agenda-mode-map "k" 'next-line)
+  (xah-fly-insert-mode-activate)
+  )
+
+(add-hook 'org-agenda-finalize-hook 'setup-agenda-mode)
 
 ;; org settings
 (defun setup-org-mode ()

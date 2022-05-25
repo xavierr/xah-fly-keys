@@ -3493,6 +3493,7 @@ Version 2019-02-12"
    ;; `
    
    ("0" . open-bookmark-file)
+   ("+" . org-agenda)
    ;; 1
    ;; 2
    ("3" . delete-window)
