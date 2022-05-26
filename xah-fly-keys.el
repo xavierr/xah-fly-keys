@@ -4008,6 +4008,10 @@ Version 2018-05-07"
   (define-key xah-fly-key-map (kbd "M-J") nil)
   (define-key xah-fly-key-map (kbd "M-L") nil)
   (define-key xah-fly-key-map (kbd "æ") nil)
+  (define-key xah-fly-key-map (kbd "I") nil)
+  (define-key xah-fly-key-map (kbd "K") nil)
+  (define-key xah-fly-key-map (kbd "J") nil)
+  (define-key xah-fly-key-map (kbd "L") nil)
   (progn
     (setq xah-fly-insert-state-q t )
     (modify-all-frames-parameters (list (cons 'cursor-type 'bar))))
