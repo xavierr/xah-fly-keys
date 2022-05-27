@@ -342,8 +342,8 @@ by my- which switches to insert mode after execution"
 ;; agenda setting
 (defun setup-agenda-mode ()
   (interactive)
-  (define-key org-agenda-mode-map "i" 'previous-line)
-  (define-key org-agenda-mode-map "k" 'next-line)
+  (define-key org-agenda-mode-map "i" 'org-agenda-previous-line)
+  (define-key org-agenda-mode-map "k" 'org-agenda-next-line)
   (xah-fly-insert-mode-activate)
   )
 
