@@ -3426,7 +3426,7 @@ Version 2019-02-12"
    ;; o
    ("p" . query-replace-regexp)
    ;; q
-   ("r" . copy-rectangle-to-register)
+   ("r" . occur)
    ;; s
    ("t" . repeat)
    ("u" . my-counsel-rg)
