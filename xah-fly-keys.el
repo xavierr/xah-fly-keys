@@ -3257,6 +3257,7 @@ Version 2019-02-12"
    ("f" . xah-open-recently-closed)
    ("y" . xah-list-recently-closed)
    ("r" . find-file)
+   ("0" . quicklink)
    ))
 
 (define-key xah-fly-c-keymap (kbd "M-i") 'split-window-vertically)
