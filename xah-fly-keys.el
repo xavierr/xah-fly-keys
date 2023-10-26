@@ -3390,6 +3390,7 @@ Version 2019-02-12"
    ("p" . kmacro-end-macro)
    ("r" . yank-rectangle)
    ("u" . xah-quote-lines)
+   ("0" . quicklink-add)
    ("y" . delete-whitespace-rectangle)))
 
 (xah-fly--define-keys
@@ -3428,6 +3429,7 @@ Version 2019-02-12"
    ("p" . query-replace-regexp)
    ;; q
    ("r" . occur)
+   ("0" . quicklink-delete)
    ;; s
    ("t" . repeat)
    ("u" . my-counsel-rg)
