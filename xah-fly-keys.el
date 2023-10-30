@@ -3342,7 +3342,7 @@ Version 2019-02-12"
    ("7" . calc)
    ;; 8
    ("9" . shell-command)
-   ("0" . shell-command-on-region)
+   ("0" . quicklink-edit-saved-values)
    ("a" . text-scale-adjust)
    ("b" . toggle-debug-on-error)
    ("c" . toggle-case-fold-search)
@@ -3429,7 +3429,7 @@ Version 2019-02-12"
    ("p" . query-replace-regexp)
    ;; q
    ("r" . occur)
-   ("0" . quicklink-delete)
+   ("0" . quicklink-rename)
    ;; s
    ("t" . repeat)
    ("u" . my-counsel-rg)
