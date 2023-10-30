@@ -3257,7 +3257,6 @@ Version 2019-02-12"
    ("f" . xah-open-recently-closed)
    ("y" . xah-list-recently-closed)
    ("r" . find-file)
-   ("0" . quicklink)
    ))
 
 (define-key xah-fly-c-keymap (kbd "M-i") 'split-window-vertically)
@@ -3342,7 +3341,7 @@ Version 2019-02-12"
    ("7" . calc)
    ;; 8
    ("9" . shell-command)
-   ("0" . quicklink-edit-saved-values)
+   ("0" . shell-command-on-region)
    ("a" . text-scale-adjust)
    ("b" . toggle-debug-on-error)
    ("c" . toggle-case-fold-search)
@@ -3390,7 +3389,6 @@ Version 2019-02-12"
    ("p" . kmacro-end-macro)
    ("r" . yank-rectangle)
    ("u" . xah-quote-lines)
-   ("0" . quicklink-add)
    ("y" . delete-whitespace-rectangle)))
 
 (xah-fly--define-keys
@@ -3429,7 +3427,6 @@ Version 2019-02-12"
    ("p" . query-replace-regexp)
    ;; q
    ("r" . occur)
-   ("0" . quicklink-rename)
    ;; s
    ("t" . repeat)
    ("u" . my-counsel-rg)
