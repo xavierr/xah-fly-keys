@@ -109,6 +109,7 @@
    ((eq major-mode 'python-mode) (define-key xah-fly-key-map (kbd "æ") 'elpy-command-map))
    ((eq major-mode 'dired-mode) (define-key xah-fly-key-map (kbd "æ") 'dired-command-map))
    ((eq major-mode 'latex-mode) (define-key xah-fly-key-map (kbd "æ") 'latex-extra-keymap))
+   ((eq major-mode 'LaTeX-mode) (define-key xah-fly-key-map (kbd "æ") 'latex-extra-keymap))
    ((eq major-mode 'matlab-shell-mode) (define-key xah-fly-key-map (kbd "æ") 'matlab-shell-debug-keymap))
    ((eq major-mode 'vterm-mode) (xavier/vterm-setup-xah-command-mode))
    (t nil)))
