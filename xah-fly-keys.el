@@ -455,24 +455,6 @@ Version 2015-06-10"
                (kill-region (region-beginning) (region-end) t)
              (kill-region (line-beginning-position) (line-beginning-position 2))))))
 
-(defun xav-append-copy-line-or-region ()
-  (interactive)
-  (append-next-kill)
-  (if (use-region-p)
-      ()
-    (kill-append "\n" nil))
-  (xah-copy-line-or-region)
-  )
-
-(defun xav-append-cut-line-or-region ()
-  (interactive)
-  (append-next-kill)
-  (if (use-region-p)
-      ()
-    (kill-append "\n" nil))
-  (xah-cut-line-or-region)
-  )
-
 (defun xah-copy-all-or-region ()
   "Put the whole buffer content to `kill-ring', or text selection if there's one.
 Respects `narrow-to-region'.
