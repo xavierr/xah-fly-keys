@@ -246,8 +246,6 @@ Version 2015-10-01"
   (interactive)
   (re-search-forward (regexp-opt xah-right-brackets) nil t))
 
-(require 'dash)
-(defvar sexp-symbols '(?\" ?$ ?'))
 (defun xah-goto-matching-bracket ()
   "Move cursor to the matching bracket.
 If cursor is not on a bracket, call `backward-up-list'.
@@ -258,8 +256,8 @@ Version 2016-11-22"
   (if (nth 3 (syntax-ppss))
       (backward-up-list 1 'ESCAPE-STRINGS 'NO-SYNTAX-CROSSING)
     (cond
-     ((--any? (eq (char-after) it) sexp-symbols) (forward-sexp))
-     ((--any? (eq (char-before) it) sexp-symbols) (backward-sexp))
+     ((eq (char-after) ?\") (forward-sexp))
+     ((eq (char-before) ?\") (backward-sexp ))
      ((looking-at (regexp-opt xah-left-brackets))
       (forward-sexp))
      ((looking-back (regexp-opt xah-right-brackets) (max (- (point) 1) 1))
@@ -1503,11 +1501,6 @@ Version 2018-06-18"
        (progn
          (message "File path copied: %s" $fpath)
          $fpath )))))
-
-(defun xah-copy-dir-path ()
-  (interactive)
-  (xah-copy-file-path t)
-  )
 
 ;; (defun xah-delete-text-block ()
 ;;   "Delete current/next text block or selection, and also copy to `kill-ring'.
@@ -3240,12 +3233,6 @@ Version 2019-02-12"
    ("y" . xah-list-recently-closed)
    ("r" . find-file)
    ))
-
-(define-key xah-fly-c-keymap (kbd "M-i") 'split-window-vertically)
-(define-key xah-fly-c-keymap (kbd "M-k") 'split-window-vertically)
-(define-key xah-fly-c-keymap (kbd "M-j") 'split-window-horizontally)
-(define-key xah-fly-c-keymap (kbd "M-l") 'split-window-horizontally)
-(define-key xah-fly-c-keymap (kbd "r") 'isearch-forward-regexp)
 
 (xah-fly--define-keys
  (define-prefix-command 'xah-fly-e-keymap)
