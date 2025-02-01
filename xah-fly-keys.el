@@ -2616,33 +2616,8 @@ Version 2015-04-09"
     (setq mark-active nil)
     (when (< $p1 (point))
       (goto-char $p1))
-    (swiper-isearch (buffer-substring-no-properties $p1 $p2))))
-
-(defun xah-query-replace-current-word ()
-  "Call `isearch' on current word or text selection.
-“word” here is A to Z, a to z, and hyphen 「-」 and underline 「_」, independent of syntax table.
-URL `http://ergoemacs.org/emacs/modernization_isearch.html'
-Version 2015-04-09"
-  (interactive)
-  (let ($p1 $p2 $wi $wr)
-    (if (use-region-p)
-        (progn
-          (setq $p1 (region-beginning))
-          (setq $p2 (region-end)))
-      (save-excursion
-        (skip-chars-backward "-_A-Za-z0-9")
-        (setq $p1 (point))
-        (right-char)
-        (skip-chars-forward "-_A-Za-z0-9")
-        (setq $p2 (point))))
-    (setq mark-active nil)
-    (when (< $p1 (point))
-      (goto-char $p1))
-    (setq $wi (buffer-substring-no-properties $p1 $p2))
-    (kill-new $wi)
-    (setq $wr (read-from-minibuffer (concat "replace " $wi " with:")))
-    (query-replace $wi $wr)
-    ))
+    (isearch-mode t)
+    (isearch-yank-string (buffer-substring-no-properties $p1 $p2))))
 
 (defun xah-show-in-desktop ()
   "Show current file in desktop.
@@ -2754,7 +2729,7 @@ Version 2017-01-29"
   (interactive)
   (describe-function major-mode))
 
-
+
 ;; key maps for conversion
 
 (defvar xah--dvorak-to-azerty-kmap
@@ -3154,7 +3129,7 @@ Version 2019-02-12"
      (define-key @keymap-name (kbd (xah-fly--key-char (car $pair))) (cdr $pair)))
    @key-cmd-alist))
 
-
+
 ;; keymaps
 
 ;; (defvar xah-fly-swapped-1-8-and-2-7-p nil "If non-nil, it means keys 1 and 8 are swapped, and 2 and 7 are swapped. See: http://xahlee.info/kbd/best_number_key_layout.html")
@@ -3208,29 +3183,26 @@ Version 2019-02-12"
    ("0" . expand-jump-to-next-slot)
    ("=" . expand-jump-to-previous-slot)))
 
-
+
 
 (xah-fly--define-keys
  (define-prefix-command 'xah-fly-c-keymap)
  '(
-   ("a" . write-file)
    ("," . xah-open-in-external-app)
-   ("." . xah-open-file-fast)
+   ("." . find-file)
    ("c" . bookmark-bmenu-list)
    ("e" . ibuffer)
-   ("u" . switch-to-buffer-other-window)
-   ("g" . find-file-other-window)
+   ("u" . xah-open-file-at-cursor)
    ("h" . recentf-open-files)
    ("i" . xah-copy-file-path)
-   ("d" . xah-copy-dir-path)
-   ("m" . xavier-copy-filename)
    ("l" . bookmark-set)
    ("n" . xah-new-empty-buffer)
-   ;; ("o" . save-buffer)
+   ("o" . xah-show-in-desktop)
    ("p" . xah-open-last-closed)
    ("f" . xah-open-recently-closed)
    ("y" . xah-list-recently-closed)
-   ("r" . find-file)
+   ("r" . xah-open-file-fast)
+   ("s" . write-file)
    ))
 
 (xah-fly--define-keys
@@ -3348,7 +3320,7 @@ Version 2019-02-12"
    ("4" . increment-register)
    ("c" . replace-rectangle)
    ("d" . delete-rectangle)
-   ("e" . xavier/call-last-kbd-macro)
+   ("e" . call-last-kbd-macro)
    ("g" . kill-rectangle)
    ("l" . clear-rectangle)
    ("i" . xah-space-to-newline)
@@ -3381,11 +3353,11 @@ Version 2019-02-12"
    ;; b
    ("c" . goto-char)
    ("d" . mark-defun)
-   ("e" . my-counsel-fzf)
+   ("e" . list-matching-lines)
    ("f" . goto-line )
    ;; g
    ("h" . xah-close-current-buffer )
-   ("i" . org-recoll-search)
+   ("i" . delete-non-matching-lines)
    ("j" . copy-to-register)
    ("k" . insert-register)
    ("l" . xah-escape-quotes)
@@ -3394,18 +3366,16 @@ Version 2019-02-12"
    ;; o
    ("p" . query-replace-regexp)
    ;; q
-   ("r" . occur)
+   ("r" . copy-rectangle-to-register)
    ;; s
    ("t" . repeat)
-   ("u" . my-counsel-rg)
+   ("u" . delete-matching-lines)
    ;; v
    ("w" . xah-next-window-or-frame)
    ;; x
    ("y" . delete-duplicate-lines)
    ;; z
-   ))
-
-(define-key xah-fly-t-keymap "y" 'xah-query-replace-current-word)
+))
 
 (xah-fly--define-keys
  (define-prefix-command 'xah-fly-w-keymap)
