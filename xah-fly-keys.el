@@ -3418,7 +3418,6 @@ Version 2019-02-12"
    ("DEL" . xah-fly-insert-mode-activate)
    ("RET" . execute-extended-command)
    ("TAB" . xah-fly--tab-key-map)
-   ("<" . xah-fly--tab-key-map)
    ("." . xah-fly-dot-keymap)
    ("'" . xah-fill-or-unfill)
    ("," . xah-fly-comma-keymap)
@@ -3429,8 +3428,7 @@ Version 2019-02-12"
    ;; [
    ("\\" . toggle-input-method)
    ;; `
-   
-   ("0" . quicklink-keymap)
+
    ;; 1
    ;; 2
    ("3" . delete-window)
@@ -3442,14 +3440,13 @@ Version 2019-02-12"
    ("9" . ispell-word)
    ;; 0
 
-   ;; ("a" . mark-whole-buffer)
-   ("a" . exchange-point-and-mark)
+   ("a" . mark-whole-buffer)
    ("b" . end-of-buffer)
    ("c" . xah-fly-c-keymap)
    ("d" . beginning-of-buffer)
    ("e" . xah-fly-e-keymap)
    ("f" . xah-search-current-word)
-   ("g" . swiper-isearch)
+   ("g" . isearch-forward)
    ("h" . xah-fly-h-keymap)
    ("i" . kill-line)
    ("j" . xah-copy-all-or-region)
@@ -3457,10 +3454,9 @@ Version 2019-02-12"
    ("l" . recenter-top-bottom)
    ("m" . dired-jump)
    ("n" . xah-fly-n-keymap)
-   ;; ("o" . exchange-point-and-mark)
-   ("o" . save-buffer)
+   ("o" . exchange-point-and-mark)
    ("p" . query-replace)
-   ;; ("q" . xah-cut-all-or-region)
+   ("q" . xah-cut-all-or-region)
    ("r" . xah-fly-r-keymap)
    ("s" . save-buffer)
    ("t" . xah-fly-t-keymap)
@@ -3473,27 +3469,7 @@ Version 2019-02-12"
    ;;
    ))
 
-(define-key xah-fly-leader-key-map (kbd "M-i") 'delete-window-up)
-(define-key xah-fly-leader-key-map (kbd "M-k") 'delete-window-down)
-(define-key xah-fly-leader-key-map (kbd "M-j") 'delete-window-left)
-(define-key xah-fly-leader-key-map (kbd "M-l") 'delete-window-right)
-(define-key xah-fly-leader-key-map (kbd "+") 'org-agenda)
-
-;; setting for newline - not optimal ...
-;; (defvar my-newline-keymap (make-sparse-keymap))
-;; (define-key my-newline-keymap (kbd "RET") #'newline)
-;; (define-key my-newline-keymap (kbd "<return>") #'newline)
-;; (defun my-newline-start ()
-;;   (interactive)
-;;   (newline)
-;;   (set-transient-map my-newline-keymap t)
-;;   )
-;; (define-key xah-fly-leader-key-map (kbd "RET") 'my-newline-start)
-;; (define-key xah-fly-leader-key-map (kbd "<return>") 'my-newline-start)
-
-(define-key xah-fly-leader-key-map (kbd "RET") 'newline)
-(define-key xah-fly-leader-key-map (kbd "<return>") 'newline)
-
+
 ;;;; misc
 
 ;; the following have keys in emacs, but right now i decided not to give them a key, because either they are rarely used (say, less than once a month by 90% of emacs users), or there is a more efficient command/workflow with key in xah-fly-keys
@@ -3525,7 +3501,7 @@ Version 2019-02-12"
 ;; C-x l	count-lines-page
 ;; C-x m	compose-mail
 
-
+
 ;; undecided yet
 
 ;; C-x e	kmacro-end-and-call-macro
@@ -3574,7 +3550,7 @@ Version 2019-02-12"
 ;; C-x C-k r	apply-macro-to-region-lines
 ;; C-x C-k s	kmacro-start-macro
 
-
+
 
 ;; C-x 4 C-f	find-file-other-window
 ;; C-x 4 C-o	display-buffer
@@ -3629,17 +3605,14 @@ Version 2019-02-12"
 ;;    ("v" . vc-next-action)
 ;;    ("~" . vc-revision-other-window)))
 
-
+
 ;; setting keys
 
 (progn
   ;; set control meta, etc keys
 
   (progn
-    ;; (define-key xah-fly-key-map (kbd "<insert>") 'xah-fly-command-mode-activate)
-    (define-key xah-fly-key-map [escape] 'xah-fly-command-mode-activate)
-    (define-key xah-fly-key-map (kbd "<insertchar>") 'xah-fly-command-mode-activate)
-    (define-key xah-fly-key-map (kbd "<f1>") 'xah-fly-command-mode-activate)
+    (define-key xah-fly-key-map (kbd "<home>") 'xah-fly-command-mode-activate)
     (define-key xah-fly-key-map (kbd "<menu>") 'xah-fly-command-mode-activate)
     (define-key xah-fly-key-map (kbd "<f8>") 'xah-fly-command-mode-activate-no-hook)
 
@@ -3724,7 +3697,7 @@ Version 2019-02-12"
     (when xah-fly-use-meta-key
       (define-key xah-fly-key-map (kbd "M-SPC") 'xah-fly-command-mode-activate-no-hook))))
 
-
+
 
 (defvar xah-fly-insert-state-q t "Boolean value. true means insertion mode is on.")
 (setq xah-fly-insert-state-q t)
@@ -3760,14 +3733,13 @@ Version 2017-01-21"
      (":" . nil)
 
      ("SPC" . xah-fly-leader-key-map)
-     ("RET" . xah-fly-insert-mode-activate)
-     ("<" . beginning-of-buffer)
-     
-     ("'" . quit-window)
+     ("DEL" . xah-fly-leader-key-map)
+
+     ("'" . xah-reformat-lines)
      ("," . xah-shrink-whitespaces)
      ("-" . xah-cycle-hyphen-underscore-space)
      ("." . xah-backward-kill-word)
-     (";" . end-of-buffer)
+     (";" . xah-comment-dwim)
      ("/" . hippie-expand)
      ("\\" . nil)
      ;; ("=" . xah-forward-equal-sign)
@@ -3782,51 +3754,40 @@ Version 2017-01-21"
      ("2" . xah-select-line)
      ("3" . delete-other-windows)
      ("4" . split-window-below)
-     ("5" . split-window-right)
+     ("5" . delete-char)
      ("6" . xah-select-block)
      ("7" . xah-select-line)
      ("8" . xah-extend-selection)
      ("9" . xah-select-text-in-quote)
      ("0" . xah-pop-local-mark-ring)
 
-     ("+" . xah-fly-insert-mode-activate)
+     ("a" . execute-extended-command)
+     ("b" . isearch-forward)
      ("c" . previous-line)
      ("d" . xah-beginning-of-line-or-block)
-     ("e" . delete-char)
-     ("f" . xah-delete-current-text-block)
+     ("e" . xah-delete-backward-char-or-bracket-text)
+     ("f" . undo)
      ("g" . backward-word)
      ("h" . backward-char)
-     ("i" . undo)
+     ("i" . xah-delete-current-text-block)
      ("j" . xah-copy-line-or-region)
      ("k" . xah-paste-or-paste-previous)
-     ("l" . xah-comment-dwim)
+     ;; ("l" . xah-fly-insert-mode-activate-space-before)
+     ("l" . xah-insert-space-before)
      ("m" . xah-backward-left-bracket)
      ("n" . forward-char)
-     ("o" . delete-backward-char)
+     ("o" . open-line)
      ("p" . xah-kill-word)
      ("q" . xah-cut-line-or-region)
      ("r" . forward-word)
      ("s" . xah-end-of-line-or-block)
      ("t" . next-line)
-     ("u" . swiper-isearch)
+     ("u" . xah-fly-insert-mode-activate)
      ("v" . xah-forward-right-bracket)
-     ("w" . xah-goto-matching-bracket)
-     ("x" . counsel-M-x)
+     ("w" . xah-next-window-or-frame)
+     ("x" . xah-toggle-letter-case)
      ("y" . set-mark-command)
      ("z" . xah-goto-matching-bracket)))
-
-    ;; (define-key xah-fly-key-map (kbd "1") 'er/expand-region)
-    (define-key xah-fly-key-map (kbd "2") 'my-mc-start)
-    (define-key xah-fly-key-map (kbd "<return>") 'xah-fly-insert-mode-activate)
-    (define-key xah-fly-key-map (kbd "F") 'swiper-isearch-backward)
-    (define-key xah-fly-key-map (kbd "C") 'xav-append-copy-line-or-region)
-    (define-key xah-fly-key-map (kbd "X") 'xav-append-cut-line-or-region)
-    (define-key xah-fly-key-map (kbd "d") 'delete-char)
-    (define-key xah-fly-key-map (kbd "ø") 'xah-end-of-line-or-block)
-    (define-key xah-fly-key-map (kbd "M-i") 'my-windmove-up)
-    (define-key xah-fly-key-map (kbd "M-k") 'my-windmove-down)
-    (define-key xah-fly-key-map (kbd "M-j") 'my-windmove-left)
-    (define-key xah-fly-key-map (kbd "M-l") 'my-windmove-right)
 
   (define-key xah-fly-key-map (kbd (xah-fly--key-char "a"))
     (if (fboundp 'smex) 'smex (if (fboundp 'helm-M-x) 'helm-M-x 'execute-extended-command)))
@@ -3872,8 +3833,7 @@ Version 2018-05-07"
      ("SPC" . nil)
      ;; ("SPC" . xah-fly-space-key)
      ("DEL" . nil)
-     ("RET" . nil)
-     ("<" . nil)
+
      ("'" . nil)
      ("," . nil)
      ("-" . nil)
@@ -3886,8 +3846,7 @@ Version 2018-05-07"
      ("]" . nil)
      ("`" . nil)
      ("~" . nil)
-     ("+" . nil)
-     
+
      ;; ("#" . nil)
      ;; ("$" . nil)
 
@@ -3931,24 +3890,7 @@ Version 2018-05-07"
 
      ;;
      ))
-  (define-key xah-fly-key-map (kbd "F") nil)
-  (define-key xah-fly-key-map (kbd "<return>") nil)
-  (define-key xah-fly-key-map (kbd "C") nil)
-  (define-key xah-fly-key-map (kbd "X") nil)
-  (define-key xah-fly-key-map (kbd "M-i") nil)
-  (define-key xah-fly-key-map (kbd "M-k") nil)
-  (define-key xah-fly-key-map (kbd "M-j") nil)
-  (define-key xah-fly-key-map (kbd "M-l") nil)
-  (define-key xah-fly-key-map (kbd "ø") nil)
-  (define-key xah-fly-key-map (kbd "M-I") nil)
-  (define-key xah-fly-key-map (kbd "M-K") nil)
-  (define-key xah-fly-key-map (kbd "M-J") nil)
-  (define-key xah-fly-key-map (kbd "M-L") nil)
-  (define-key xah-fly-key-map (kbd "æ") nil)
-  (define-key xah-fly-key-map (kbd "I") nil)
-  (define-key xah-fly-key-map (kbd "K") nil)
-  (define-key xah-fly-key-map (kbd "J") nil)
-  (define-key xah-fly-key-map (kbd "L") nil)
+
   (progn
     (setq xah-fly-insert-state-q t )
     (modify-all-frames-parameters (list (cons 'cursor-type 'bar))))
@@ -4011,31 +3953,16 @@ Version 2017-07-07"
   (xah-fly-insert-mode-activate)
   (left-char))
 
-
+
 
 ;; ;; when in shell mode, switch to insertion mode.
 ;; (add-hook 'dired-mode-hook 'xah-fly-keys-off)
 
-
+
 
 ;; experimental. auto switch back to command mode after some sec of idle time
 ;; (setq xah-fly-timer-id (run-with-idle-timer 20 t 'xah-fly-command-mode-activate))
 ;; (cancel-timer xah-fly-timer-id)
-
-(defvar xah-fly-insert-state-before-minibuffer-q nil
-  "value xah-fly-insert-state-q before entering minibuffer")
-
-(defun xah-minibuffer-setup-hook ()
-  (setq xah-fly-insert-state-before-minibuffer-q xah-fly-insert-state-q)
-  (xah-fly-insert-mode-activate)
-  )
-
-(defun xah-minibuffer-exit-hook ()
-  (if xah-fly-insert-state-before-minibuffer-q
-      (xah-fly-insert-mode-activate)
-    (xah-fly-command-mode-activate)
-    )
-  )
 
 (define-minor-mode xah-fly-keys
   "A modal keybinding set, like vim, but based on ergonomic principles, like Dvorak layout.
@@ -4043,8 +3970,8 @@ URL `http://ergoemacs.org/misc/ergoemacs_vi_mode.html'"
   t "∑flykeys" xah-fly-key-map
   (progn
     ;; when going into minibuffer, switch to insertion mode.
-    (add-hook 'minibuffer-setup-hook 'xah-minibuffer-setup-hook)
-    (add-hook 'minibuffer-exit-hook 'xah-minibuffer-exit-hook)
+    (add-hook 'minibuffer-setup-hook 'xah-fly-insert-mode-activate)
+    (add-hook 'minibuffer-exit-hook 'xah-fly-command-mode-activate)
     ;; (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
     ;; when in shell mode, switch to insertion mode.
     ;; (add-hook 'shell-mode-hook 'xah-fly-insert-mode-activate)
@@ -4065,19 +3992,6 @@ URL `http://ergoemacs.org/misc/ergoemacs_vi_mode.html'"
   (xah-fly-insert-mode-activate)
   (xah-fly-keys 0))
 
-
-(defun copy-to-other-window ()
-  (interactive)
-  (if (use-region-p)
-      (copy-region-as-kill (region-beginning) (region-end))
-    (copy-region-as-kill (line-beginning-position) (line-end-position))
-    (end-of-line)
-    (forward-char))
-  (with-selected-window (next-window)
-    (yank)
-    (insert "\n"))
-  )
-(define-key xah-fly-r-keymap "v" 'copy-to-other-window)
 (provide 'xah-fly-keys)
 
 ;;; xah-fly-keys.el ends here
