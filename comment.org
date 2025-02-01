@@ -3,3 +3,11 @@
 * xah-query-replace-current-word
 * in define-minor-mode xah-fly-keys
   use xah-minibuffer-setup-hook and xah-minibuffer-exit-hook
+* elisp
+  It is possible to define directly prefix key (or fake it, not sure) by first assigning ~nil~ to the key and use a
+  sequence with that same key as the first element, see here
+  #+begin_src elisp
+    (define-key keymap (kbd ".") nil)
+    (define-key keymap (kbd ". .") 'highlight-symbol-at-point)
+  #+end_src
+
