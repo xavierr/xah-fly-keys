@@ -1,4 +1,9 @@
-# emacs
 *~
 *.elc
 [#]*[#]
+xx*
+.DS_Store
+
+# ELPA-generated files
+/xah-fly-keys-autoloads.el
+/xah-fly-keys-pkg.el
