@@ -117,14 +117,14 @@
 
 ;; If you like this project, Buy Xah Emacs Tutorial http://ergoemacs.org/emacs/buy_xah_emacs_tutorial.html or make a donation. Thanks.
 
-
+
 ;;; Code:
 
 (require 'dired) ; in emacs
 (require 'dired-x) ; in emacs
 (require 'ido) ; in emacs
 
-
+
 
 (when (version<= emacs-version "26.0.50"  )
   (defalias 'global-display-line-numbers-mode 'linum-mode ))
@@ -132,11 +132,10 @@
 (defvar xah-fly-command-mode-activate-hook nil "Hook for `xah-fly-command-mode-activate'")
 (defvar xah-fly-insert-mode-activate-hook nil "Hook for `xah-fly-insert-mode-activate'")
 
-(defvar xah-fly-use-control-key nil "if nil, do not bind any control key. When t, standard keys for open, close, paste, are bound.")
-
+(defvar xah-fly-use-control-key t "if nil, do not bind any control key. When t, standard keys for open, close, paste, are bound.")
 (defvar xah-fly-use-meta-key t "if nil, do not bind any meta key.")
 
-
+
 ;; cursor movement
 
 (defun xah-pop-local-mark-ring ()
@@ -399,7 +398,7 @@ Version 2015-03-24"
 ;;   (posix-search-backward "[ \t\n]+" nil t)
 ;;   )
 
-
+
 ;; editing commands
 
 (defun xah-copy-line-or-region ()
@@ -1603,7 +1602,7 @@ version 2016-07-17"
   (require 'rect)
   (kill-new (mapconcat 'identity (extract-rectangle @begin @end) "\n")))
 
-
+
 ;; insertion commands
 
 (defun xah-insert-date ()
@@ -1911,7 +1910,7 @@ Version 2015-11-06"
           (ido-completing-read "insert:" (mapcar (lambda (x) (concat (car x) (cdr x))) xah-unicode-list)))
     (insert (car (assoc (substring gotThis 0 1) xah-unicode-list)))))
 
-
+
 ;; text selection
 
 (defun xah-select-current-block ()
@@ -2089,7 +2088,7 @@ Version 2018-10-11"
     (skip-chars-forward $skipChars)
     (set-mark $p1)))
 
-
+
 ;; misc
 
 (defun xah-user-buffer-q ()
@@ -2319,7 +2318,7 @@ Version 2019-01-16"
             (when (y-or-n-p (format "file no exist: 「%s」. Create?" $path))
               (find-file $path ))))))))
 
-
+
 
 (defvar xah-run-current-file-before-hook nil "Hook for `xah-run-current-file'. Before the file is run.")
 
@@ -2597,7 +2596,7 @@ Version 2017-08-27"
     (when (eq major-mode 'dired-mode)
       (revert-buffer))))
 
-
+
 
 (defun xah-search-current-word ()
   "Call `isearch' on current word or text selection.
