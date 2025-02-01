@@ -1,0 +1,5 @@
+* xah-goto-matching-bracket
+* xah-search-current-word 
+* xah-query-replace-current-word
+* in define-minor-mode xah-fly-keys
+  use xah-minibuffer-setup-hook and xah-minibuffer-exit-hook

@@ -1,3 +1,5 @@
+(setq xah-fly-use-control-key nil)
+
 (defun xav-append-copy-line-or-region ()
   (interactive)
   (append-next-kill)
