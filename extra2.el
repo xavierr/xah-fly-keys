@@ -130,7 +130,7 @@ Version 2015-04-09"
        ("RET" . 'newline)
        ("<return>" . 'newline)
 
-       
+       ;; c (dvorak) -> i (qwerty)
        ("c a" . write-file)
        ("c ." . xah-open-file-fast)
        ("c u" . switch-to-buffer-other-window)
@@ -143,13 +143,16 @@ Version 2015-04-09"
        ("c M-j" . split-window-horizontally)
        ("c M-l" . split-window-horizontally)
 
+       ;; r (dvorak) -> o (qwerty)
        ("r e" . xavier/call-last-kbd-macro)
        ("r v" . copy-to-other-window)
        
+       ;; t (dvorak) -> k (qwerty)
        ("t e" . my-counsel-fzf)
        ("t i" . org-recoll-search)
        ("t r" . occur)
        ("t u" . my-counsel-rg)
+       ("t h" . xah-close-current-buffer)
        ("t k" . xah-query-replace-current-word)
     ))))
 
