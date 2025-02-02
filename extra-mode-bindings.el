@@ -138,7 +138,6 @@ by my- which switches to insert mode after execution"
 (create-func-with-insert-mode-switch forward-word)
 (create-func-with-insert-mode-switch backward-word)
 (create-func-with-insert-mode-switch xah-cut-line-or-region)
-(create-func-with-insert-mode-switch xah-cut-line-or-region)
 (create-func-with-insert-mode-switch yank)
 (create-func-with-insert-mode-switch end-of-buffer)
 
@@ -396,8 +395,6 @@ by my- which switches to insert mode after execution"
   (xah-fly-insert-mode-activate)
   )
 (add-hook 'ibuffer-hook #'setup-ibuffer)
-
-
 
 ;; Use which-key package
 (require 'which-key)
