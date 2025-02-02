@@ -1,3 +1,21 @@
+(setq xah-fly--convert-key t)
+
+(xah-fly--convert-key (kbd "a"))
+
+(setq xah-fly-key-current-layout "qwerty-no")
+
+
+(defun xah-fly-define-keys-2 ()
+  "Define the keys for xah-fly-keys.
+Created: 2022-10-31
+Version: 2024-04-22"
+  (interactive)
+  (let ()
+    (xah-fly--define-keys
+     (define-prefix-command 'xah-fly-leader-key-map)    
+    ))
+
+
 (define-key xah-fly-leader-key-map (kbd "M-i") 'delete-window-up)
 (define-key xah-fly-leader-key-map (kbd "M-k") 'delete-window-down)
 (define-key xah-fly-leader-key-map (kbd "M-j") 'delete-window-left)
