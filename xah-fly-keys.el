@@ -3514,7 +3514,7 @@ Version 2019-02-12"
    ("g" . swiper-isearch)
    ("h" . xah-fly-h-keymap)
    ("i" . kill-line)
-   ("j" . xah-copy-all-or-region)
+   ("q" . xah-copy-all-or-region)
    ("k" . xah-paste-or-paste-previous)
    ("l" . recenter-top-bottom)
    ("m" . dired-jump)

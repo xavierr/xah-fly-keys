@@ -448,5 +448,10 @@ by my- which switches to insert mode after execution"
 (define-key my-whole-line-select-map (kbd "k") 'move-down-one-line)
 (define-key xah-fly-leader-key-map (kbd "t") 'select-whole-line)
 
+(with-eval-after-load 'llm-setup
+  (define-key xah-fly-leader-key-map (kbd "c") 'copilot-prefix-map)
+  (define-key xah-fly-leader-key-map (kbd "g") 'gptel-prefix-map)
+  )
+
 (provide 'extra-mode-bindings)
  
