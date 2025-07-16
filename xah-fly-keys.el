@@ -3266,34 +3266,6 @@ Version 2019-02-12"
 (define-key xah-fly-c-keymap (kbd "r") 'isearch-forward-regexp)
 
 (xah-fly--define-keys
- (define-prefix-command 'xah-fly-e-keymap)
- '(
-   ("RET" . insert-char)
-   ("SPC" . xah-insert-unicode)
-
-   ("W" . xah-insert-double-angle-bracket《》)
-   ("b" . xah-insert-black-lenticular-bracket【】)
-   ("c" . xah-insert-ascii-single-quote)
-   ("d" . xah-insert-double-curly-quote“”)
-   ("f" . xah-insert-emacs-quote)
-   ("g" . xah-insert-ascii-double-quote)
-   ("h" . xah-insert-brace) ; {}
-   ("i" . xah-insert-curly-single-quote‘’)
-   ("l" . xah-insert-formfeed)
-   ("m" . xah-insert-corner-bracket「」)
-   ("n" . xah-insert-square-bracket) ; []
-   ("p" . xah-insert-single-angle-quote‹›)
-   ("r" . xah-insert-tortoise-shell-bracket〔〕 )
-   ("s" . xah-insert-string-assignment)
-   ("t" . xah-insert-paren)
-   ("u" . xah-insert-date)
-   ("w" . xah-insert-angle-bracket〈〉)
-   ("y" . xah-insert-double-angle-quote«»)
-   ;;
-
-   ))
-
-(xah-fly--define-keys
  (define-prefix-command 'xah-fly-h-keymap)
  '(
    (";" . Info-goto-emacs-command-node)
@@ -3509,7 +3481,7 @@ Version 2019-02-12"
    ("b" . end-of-buffer)
    ("c" . xah-fly-c-keymap)
    ("d" . beginning-of-buffer)
-   ("e" . xah-fly-e-keymap)
+   ("e" . denote-key-map)
    ("f" . xah-search-current-word)
    ("g" . swiper-isearch)
    ("h" . xah-fly-h-keymap)
