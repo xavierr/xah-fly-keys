@@ -453,5 +453,10 @@ by my- which switches to insert mode after execution"
   (define-key xah-fly-leader-key-map (kbd "g") 'gptel-prefix-map)
   )
 
+
+(with-eval-after-load 'org-init
+  (define-key xah-fly-leader-key-map (kbd "a") 'org-agenda)
+  )
+
 (provide 'extra-mode-bindings)
  
