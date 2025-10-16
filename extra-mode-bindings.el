@@ -454,8 +454,8 @@ by my- which switches to insert mode after execution"
   )
 
 
-(with-eval-after-load 'org-init
-  (define-key xah-fly-leader-key-map (kbd "a") 'org-agenda)
+(with-eval-after-load 'denote-setup
+  (define-key xah-fly-leader-key-map (kbd "a") 'xavier-agenda-transient)
   )
 
 (provide 'extra-mode-bindings)
