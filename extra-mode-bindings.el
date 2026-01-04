@@ -453,10 +453,14 @@ by my- which switches to insert mode after execution"
   (define-key xah-fly-leader-key-map (kbd "g") 'gptel-prefix-map)
   )
 
-
 (with-eval-after-load 'denote-setup
   (define-key xah-fly-leader-key-map (kbd "a") 'xavier-agenda-transient)
   )
+
+(with-eval-after-load 'whisper-setup
+  (define-key xah-fly-leader-key-map (kbd "w") 'xavier-whisper-transient)
+  )
+
 
 (provide 'extra-mode-bindings)
  
