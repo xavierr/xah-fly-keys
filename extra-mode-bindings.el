@@ -450,7 +450,7 @@ by my- which switches to insert mode after execution"
 
 (with-eval-after-load 'llm-setup
   (define-key xah-fly-leader-key-map (kbd "c") 'copilot-prefix-map)
-  (define-key xah-fly-leader-key-map (kbd "g") 'gptel-prefix-map)
+  (define-key xah-fly-leader-key-map (kbd "g") 'xavier-agent-shell-transient)
   )
 
 (with-eval-after-load 'denote-setup
