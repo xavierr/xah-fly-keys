@@ -3819,7 +3819,7 @@ Version 2017-01-21"
      ("5" . split-window-below)
      ("6" . xah-select-block)
      ("7" . xah-select-line)
-     ("8" . xah-extend-selection)
+     ("8" . balance-windows)
      ("9" . xah-select-text-in-quote)
      ("0" . xah-pop-local-mark-ring)
 
